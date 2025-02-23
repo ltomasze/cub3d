@@ -6,11 +6,13 @@
 /*   By: ltomasze <ltomasze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/22 15:45:26 by ltomasze          #+#    #+#             */
-/*   Updated: 2025/02/23 13:20:36 by ltomasze         ###   ########.fr       */
+/*   Updated: 2025/02/23 13:42:15 by ltomasze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/cub3d.h"
+#include "../includes/cub3d.h"
+
+
 
 void ft_error(char *str)
 {

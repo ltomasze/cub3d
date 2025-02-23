@@ -6,12 +6,12 @@
 /*   By: ltomasze <ltomasze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/22 13:54:02 by ltomasze          #+#    #+#             */
-/*   Updated: 2025/02/22 15:28:01 by ltomasze         ###   ########.fr       */
+/*   Updated: 2025/02/23 13:42:21 by ltomasze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/cub3d.h"
-#include "../include/get_next_line.h"
+#include "../includes/cub3d.h"
+#include "../includes/get_next_line.h"
 
 static char	*ft_transfer(char *base, char *addition)
 {
