@@ -6,7 +6,7 @@
 /*   By: ltomasze <ltomasze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/22 15:45:26 by ltomasze          #+#    #+#             */
-/*   Updated: 2025/03/02 12:08:00 by ltomasze         ###   ########.fr       */
+/*   Updated: 2025/03/02 12:15:24 by ltomasze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -222,27 +222,16 @@ void new_window(t_game *game, const char *map_file)
     mlx_loop(game->mlx);
 }
 
-// int	main(int argc, char **argv)
-// {
-//     t_game game;
-// 	if(ft_check_args(argc, argv))
-// 	{
-// 		printf("Usage: ./cub3d maps/<map_file.cub>\n");
-// 		return 1;
-// 	}
-// 	if(ft_check_file(argv[1]))
-// 		return 1;
-//     new_window(&game);
-// 	return 0;
-// }
-
-int main(int argc, char **argv)
+int	main(int argc, char **argv)
 {
     t_game game;
-
-    if (ft_check_args(argc, argv) || ft_check_file(argv[1]))
-        return (1);
-
+	if(ft_check_args(argc, argv))
+	{
+		printf("Usage: ./cub3d maps/<map_file.cub>\n");
+		return 1;
+	}
+	if(ft_check_file(argv[1]))
+		return 1;
     new_window(&game, argv[1]);
-    return (0);
+	return 0;
 }
