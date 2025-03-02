@@ -6,7 +6,7 @@
 /*   By: ltomasze <ltomasze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/22 15:45:26 by ltomasze          #+#    #+#             */
-/*   Updated: 2025/03/02 12:15:24 by ltomasze         ###   ########.fr       */
+/*   Updated: 2025/03/02 12:18:40 by ltomasze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ int ft_is_map_line(char *line)
     return 0;
 }
 
-int ft_check_file(const char *filename)
+int ft_check_tcm(const char *filename)
 {
     int fd = open(filename, O_RDONLY);
     if (fd == -1)
@@ -230,7 +230,7 @@ int	main(int argc, char **argv)
 		printf("Usage: ./cub3d maps/<map_file.cub>\n");
 		return 1;
 	}
-	if(ft_check_file(argv[1]))
+	if(ft_check_tcm(argv[1]))
 		return 1;
     new_window(&game, argv[1]);
 	return 0;
