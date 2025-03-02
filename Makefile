@@ -6,12 +6,12 @@
 #    By: ltomasze <ltomasze@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/02/22 13:48:19 by ltomasze          #+#    #+#              #
-#    Updated: 2025/02/22 15:43:12 by ltomasze         ###   ########.fr        #
+#    Updated: 2025/03/02 18:11:57 by ltomasze         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = cub3d
-SOURCES = src/get_next_line.c src/main.c \
+SOURCES = src/get_next_line.c src/main.c src/check_tcm.c \
 
 OBJECTS = $(SOURCES:%.c=%.o)
 CC = cc

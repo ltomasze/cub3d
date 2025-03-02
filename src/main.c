@@ -6,12 +6,11 @@
 /*   By: ltomasze <ltomasze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/22 15:45:26 by ltomasze          #+#    #+#             */
-/*   Updated: 2025/03/02 17:58:30 by ltomasze         ###   ########.fr       */
+/*   Updated: 2025/03/02 18:09:58 by ltomasze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
-
 
 int ft_check_args(int argc, char **argv)
 {
@@ -149,11 +148,6 @@ int	main(int argc, char **argv)
 	}
 	if(ft_check_tcm(argv[1]))
 		return 1;
-    if(ft_check_map_last(argv[1]))
-    {
-        printf("Error: Map is not at the end of the file\n");
-        return 1;
-    }
     //new_window(&game, argv[1]);
 	return 0;
 }
