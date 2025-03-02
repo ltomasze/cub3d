@@ -6,12 +6,11 @@
 /*   By: ltomasze <ltomasze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/22 15:45:26 by ltomasze          #+#    #+#             */
-/*   Updated: 2025/03/02 12:27:44 by ltomasze         ###   ########.fr       */
+/*   Updated: 2025/03/02 17:58:30 by ltomasze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
-
 
 
 int ft_check_args(int argc, char **argv)
@@ -28,7 +27,7 @@ int ft_check_args(int argc, char **argv)
 	close(fd);
 	return 0;
 }
-
+/*
 int handle_key(int key, t_game *game)
 {
     if (key == ESC_KEY)
@@ -136,11 +135,13 @@ void new_window(t_game *game, const char *map_file)
     draw_map(game);
     mlx_key_hook(game->win, handle_key, game);
     mlx_loop(game->mlx);
-}
+}*/
 
 int	main(int argc, char **argv)
 {
-    t_game game;
+
+    //t_game game;
+
 	if(ft_check_args(argc, argv))
 	{
 		printf("Usage: ./cub3d maps/<map_file.cub>\n");
@@ -148,6 +149,11 @@ int	main(int argc, char **argv)
 	}
 	if(ft_check_tcm(argv[1]))
 		return 1;
-    new_window(&game, argv[1]);
+    if(ft_check_map_last(argv[1]))
+    {
+        printf("Error: Map is not at the end of the file\n");
+        return 1;
+    }
+    //new_window(&game, argv[1]);
 	return 0;
 }
