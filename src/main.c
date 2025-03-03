@@ -6,11 +6,17 @@
 /*   By: ltomasze <ltomasze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/22 15:45:26 by ltomasze          #+#    #+#             */
-/*   Updated: 2025/03/02 18:09:58 by ltomasze         ###   ########.fr       */
+/*   Updated: 2025/03/03 20:59:01 by ltomasze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
+#include <fcntl.h>
+#include <unistd.h>
+#include <stdlib.h>
+#include <stdio.h>
+#include <string.h>
+#include <ctype.h>
 
 int ft_check_args(int argc, char **argv)
 {
@@ -135,6 +141,7 @@ void new_window(t_game *game, const char *map_file)
     mlx_key_hook(game->win, handle_key, game);
     mlx_loop(game->mlx);
 }*/
+
 
 int	main(int argc, char **argv)
 {
