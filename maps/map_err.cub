@@ -1,7 +1,5 @@
-NO textures/blue_stone.xpm
-SO textures/color_stone.xpm
-WE textures/grey_stone.xpm
-EA textures/eagle.xpm
+F 150,75,0
+C 0,0,0
         1111111111111111111111111
         1000000000110000000000001
         1011000001110000000000001
@@ -16,5 +14,7 @@ EA textures/eagle.xpm
 11000001110101011111011110N0111
 11110111111101011101111010001
 11111111111111111111111111111
-F 150,75,0
-C 0,0,0
+NO textures/blue_stone.xpm
+SO textures/color_stone.xpm
+WE textures/grey_stone.xpm
+EA textures/eagle.xpm
