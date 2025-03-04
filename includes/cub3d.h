@@ -6,7 +6,7 @@
 /*   By: ltomasze <ltomasze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/22 15:16:49 by ltomasze          #+#    #+#             */
-/*   Updated: 2025/03/02 15:24:28 by ltomasze         ###   ########.fr       */
+/*   Updated: 2025/03/04 17:31:05 by ltomasze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 # include "../minilibx-linux/mlx.h"
 # include "../minilibx-linux/mlx_int.h"
 # include "../libft/libft.h"
-# include "../includes/get_next_line.h"
 /*
 typedef struct s_game
 {
@@ -27,6 +26,8 @@ typedef struct s_game
 
 #define ESC_KEY 65307  // ESC
 */
+//get_next_line.c
+char	*get_next_line(int fd);
 //check_tcm.c
 char *ft_skip_whitespaces(char *line);
 int ft_is_texture_line(char *line);
