@@ -6,7 +6,7 @@
 /*   By: ltomasze <ltomasze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/22 15:45:26 by ltomasze          #+#    #+#             */
-/*   Updated: 2025/03/05 13:18:08 by ltomasze         ###   ########.fr       */
+/*   Updated: 2025/03/05 14:07:12 by ltomasze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,7 +137,6 @@ void new_window(t_game *game, const char *map_file)
 }*/
 
 
-
 int	main(int argc, char **argv)
 {
 
@@ -151,6 +150,10 @@ int	main(int argc, char **argv)
 	if(ft_check_tcm(argv[1]))
 		return 1;
     if (ft_check_map_is_last(argv[1]))
+    {
+        return 1;
+    }
+    if(ft_check_map_continuous(argv[1]))
     {
         return 1;
     }

@@ -6,7 +6,7 @@
 /*   By: ltomasze <ltomasze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/22 15:16:49 by ltomasze          #+#    #+#             */
-/*   Updated: 2025/03/04 18:18:51 by ltomasze         ###   ########.fr       */
+/*   Updated: 2025/03/05 14:03:53 by ltomasze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,3 +37,5 @@ int ft_is_map_line(char *line);
 int ft_check_tcm(const char *filename);
 //check_map_is_last.c
 int ft_check_map_is_last(const char *filename);
+//check_map_continuous.c
+int ft_check_map_continuous(const char *filename);
