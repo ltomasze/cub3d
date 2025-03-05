@@ -6,7 +6,7 @@
 /*   By: ltomasze <ltomasze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/04 18:15:46 by ltomasze          #+#    #+#             */
-/*   Updated: 2025/03/04 18:16:32 by ltomasze         ###   ########.fr       */
+/*   Updated: 2025/03/05 13:21:21 by ltomasze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int ft_check_map_is_last(const char *filename)
         {
             if (!has_texture || !has_color)
             {
-                printf("Error: Map line found before texture or color lines.\n");
+                printf("Error: Map found before texture or color.\n");
                 free(line);
                 close(fd);
                 return 1;

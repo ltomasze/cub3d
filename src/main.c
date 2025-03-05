@@ -6,7 +6,7 @@
 /*   By: ltomasze <ltomasze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/22 15:45:26 by ltomasze          #+#    #+#             */
-/*   Updated: 2025/03/04 18:19:55 by ltomasze         ###   ########.fr       */
+/*   Updated: 2025/03/05 13:18:08 by ltomasze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -151,7 +151,9 @@ int	main(int argc, char **argv)
 	if(ft_check_tcm(argv[1]))
 		return 1;
     if (ft_check_map_is_last(argv[1]))
+    {
         return 1;
+    }
     //new_window(&game, argv[1]);
 	return 0;
 }
