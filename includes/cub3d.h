@@ -6,7 +6,7 @@
 /*   By: ltomasze <ltomasze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/22 15:16:49 by ltomasze          #+#    #+#             */
-/*   Updated: 2025/03/06 13:35:18 by ltomasze         ###   ########.fr       */
+/*   Updated: 2025/03/06 14:05:44 by ltomasze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,3 +42,5 @@ int ft_check_map_vertical(const char *filename);
 //check_map_characters.c
 int ft_check_map_line_chars(const char *line);
 int ft_check_map_characters(const char *filename);
+//check_map_player_count.c
+int ft_check_map_player_count(const char *filename);
