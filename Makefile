@@ -6,13 +6,13 @@
 #    By: ltomasze <ltomasze@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/02/22 13:48:19 by ltomasze          #+#    #+#              #
-#    Updated: 2025/03/05 14:08:00 by ltomasze         ###   ########.fr        #
+#    Updated: 2025/03/06 13:09:54 by ltomasze         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = cub3d
 SOURCES = src/get_next_line.c src/main.c \
-src/check_tcm.c src/check_map_is_last.c src/check_map_continuous.c \
+src/check_tcm.c src/check_map_is_last.c src/check_map_vertical.c \
 
 OBJECTS = $(SOURCES:%.c=%.o)
 CC = cc

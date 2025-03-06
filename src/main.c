@@ -6,7 +6,7 @@
 /*   By: ltomasze <ltomasze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/22 15:45:26 by ltomasze          #+#    #+#             */
-/*   Updated: 2025/03/05 14:07:12 by ltomasze         ###   ########.fr       */
+/*   Updated: 2025/03/06 13:09:21 by ltomasze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -153,7 +153,7 @@ int	main(int argc, char **argv)
     {
         return 1;
     }
-    if(ft_check_map_continuous(argv[1]))
+    if(ft_check_map_vertical(argv[1]))
     {
         return 1;
     }

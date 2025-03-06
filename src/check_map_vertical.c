@@ -6,13 +6,13 @@
 /*   By: ltomasze <ltomasze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/05 14:02:26 by ltomasze          #+#    #+#             */
-/*   Updated: 2025/03/05 14:07:10 by ltomasze         ###   ########.fr       */
+/*   Updated: 2025/03/06 13:09:21 by ltomasze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
-int ft_check_map_continuous(const char *filename)
+int ft_check_map_vertical(const char *filename)
 {
     int fd = open(filename, O_RDONLY);
     if (fd == -1)
