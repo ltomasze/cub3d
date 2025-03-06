@@ -6,7 +6,7 @@
 /*   By: ltomasze <ltomasze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/22 15:45:26 by ltomasze          #+#    #+#             */
-/*   Updated: 2025/03/06 14:07:57 by ltomasze         ###   ########.fr       */
+/*   Updated: 2025/03/06 16:18:13 by ltomasze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -148,24 +148,12 @@ int	main(int argc, char **argv)
 		printf("Usage: ./cub3d maps/<map_file.cub>\n");
 		return 1;
 	}
-	if(ft_check_tcm(argv[1]))
-		return 1;
-    if (ft_check_map_is_last(argv[1]))
-    {
+	if(ft_check_tcm(argv[1]) ||
+        ft_check_map_is_last(argv[1]) ||
+        ft_check_map_vertical(argv[1]) ||
+        ft_check_map_characters(argv[1]) ||
+        ft_check_map_player_count(argv[1]))
         return 1;
-    }
-    if(ft_check_map_vertical(argv[1]))
-    {
-        return 1;
-    }
-    if(ft_check_map_characters(argv[1]))
-    {
-        return 1;
-    }
-    if(ft_check_map_player_count(argv[1]))
-    {
-        return 1;
-    }
     //new_window(&game, argv[1]);
 	return 0;
 }
