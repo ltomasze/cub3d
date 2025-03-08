@@ -6,7 +6,7 @@
 /*   By: ltomasze <ltomasze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/22 15:45:26 by ltomasze          #+#    #+#             */
-/*   Updated: 2025/03/08 17:40:32 by ltomasze         ###   ########.fr       */
+/*   Updated: 2025/03/08 18:14:47 by ltomasze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -158,9 +158,6 @@ int ft_get_map_width(char **map)
     return max_width;
 }
 
-// Funkcja, która wczytuje z pliku linie mapy (pomijając linie konfiguracji)
-// i zapisuje je do dynamicznej tablicy (kończonej NULL-em).
-// Po zakończeniu, w *height zapisuje liczbę linii, a w *width maksymalną szerokość.
 char **ft_get_map_lines(const char *filename, int *height, int *width) 
 {
     int fd = open(filename, O_RDONLY);
@@ -239,11 +236,7 @@ char **ft_get_map_lines(const char *filename, int *height, int *width)
     
 }
 
-// Funkcja sprawdzająca granice dla każdej komórki '0' w mapie.
-// Dla każdej '0' sprawdzamy jej 8 sąsiadów (w tym przekątne).
-// Jeśli którykolwiek sąsiad nie należy do zbioru dozwolonych znaków,
-// wypisujemy błąd i zwracamy 1.
-int ft_check_map_boundaries(char **map, int height, int max_width)
+int ft_check_floor_border(char **map, int height, int max_width)
 {
     (void)max_width;
     int y = 0;
@@ -307,23 +300,23 @@ void ft_free_map(char **map, int height)
     free(map);
 }
 
-char **ft_load_and_check_map(const char *filename, int *height, int *width)
+int ft_check_map_border(const char *filename)
 {
-    char **map = ft_get_map_lines(filename, height, width);
+    int height, width;
+    char **map = ft_get_map_lines(filename, &height, &width);
     if (!map)
-        return NULL;
-
-    if (ft_check_map_boundaries(map, *height, *width))
+        return 1;
+    if (ft_check_floor_border(map, height, width))
     {
-        ft_free_map(map, *height);
-        return NULL;
+        ft_free_map(map, height);
+        return 1;
     }
-    return map;
+    ft_free_map(map, height);
+    return 0;
 }
 
 int	main(int argc, char **argv)
 {
-    int height, width;
     //t_game game;
 
 	if(ft_check_args(argc, argv))
@@ -335,12 +328,9 @@ int	main(int argc, char **argv)
         ft_check_map_is_last(argv[1]) ||
         ft_check_map_vertical(argv[1]) ||
         ft_check_map_characters(argv[1]) ||
-        ft_check_map_player_count(argv[1]))
-        return 1;
-    char **map = ft_load_and_check_map(argv[1], &height, &width);
-    if (!map)
+        ft_check_map_player_count(argv[1]) ||
+        ft_check_map_border(argv[1]))
         return 1;
     //new_window(&game, argv[1]);
-    ft_free_map(map, height);
     return 0;
 }
