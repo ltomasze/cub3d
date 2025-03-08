@@ -6,7 +6,7 @@
 /*   By: ltomasze <ltomasze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/22 15:45:26 by ltomasze          #+#    #+#             */
-/*   Updated: 2025/03/08 16:00:00 by ltomasze         ###   ########.fr       */
+/*   Updated: 2025/03/08 16:47:52 by ltomasze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,20 +136,24 @@ void new_window(t_game *game, const char *map_file)
     mlx_loop(game->mlx);
 }*/
 
-int ft_get_map_height(char **map) {
+int ft_get_map_height(char **map) 
+{
     int count = 0;
     while (map[count] != NULL)
         count++;
     return count;
 }
 
-// Funkcja zwracająca maksymalną szerokość mapy (najdłuższy wiersz)
-int ft_get_map_width(char **map) {
+int ft_get_map_width(char **map)
+{
     int max_width = 0;
-    for (int i = 0; map[i] != NULL; i++) {
-        int len = strlen(map[i]);
+    int i = 0;
+    while (map[i] != NULL)
+    {
+        int len = ft_strlen(map[i]);
         if (len > max_width)
             max_width = len;
+        i++;
     }
     return max_width;
 }
