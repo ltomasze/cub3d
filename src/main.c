@@ -6,7 +6,7 @@
 /*   By: ltomasze <ltomasze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/22 15:45:26 by ltomasze          #+#    #+#             */
-/*   Updated: 2025/03/06 16:18:13 by ltomasze         ###   ########.fr       */
+/*   Updated: 2025/03/08 16:00:00 by ltomasze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,7 +136,120 @@ void new_window(t_game *game, const char *map_file)
     mlx_loop(game->mlx);
 }*/
 
+int ft_get_map_height(char **map) {
+    int count = 0;
+    while (map[count] != NULL)
+        count++;
+    return count;
+}
 
+// Funkcja zwracająca maksymalną szerokość mapy (najdłuższy wiersz)
+int ft_get_map_width(char **map) {
+    int max_width = 0;
+    for (int i = 0; map[i] != NULL; i++) {
+        int len = strlen(map[i]);
+        if (len > max_width)
+            max_width = len;
+    }
+    return max_width;
+}
+
+// Funkcja, która wczytuje z pliku linie mapy (pomijając linie konfiguracji)
+// i zapisuje je do dynamicznej tablicy (kończonej NULL-em).
+// Po zakończeniu, w *height zapisuje liczbę linii, a w *width maksymalną szerokość.
+char **ft_get_map_lines(const char *filename, int *height, int *width) {
+    int fd = open(filename, O_RDONLY);
+    if (fd == -1) {
+        printf("Error: Cannot open file %s\n", filename);
+        return NULL;
+    }
+    
+    char **map = NULL;
+    int count = 0;
+    int max_width = 0;
+    int map_started = 0;
+    char *line = NULL;
+    
+    while ((line = get_next_line(fd)) != NULL) {
+        // Jeśli mapa jeszcze się nie rozpoczęła, sprawdzamy, czy linia wygląda jak linia mapy.
+        if (!map_started && ft_is_map_line(line)) {
+            map_started = 1;
+        }
+        if (map_started) {
+            // Jeśli natrafimy na pustą linię po rozpoczęciu mapy, kończymy wczytywanie.
+            if (line[0] == '\n' || line[0] == '\0') {
+                free(line);
+                break;
+            }
+            map = realloc(map, sizeof(char *) * (count + 1));
+            if (!map) {
+                printf("Error: Memory allocation failed\n");
+                close(fd);
+                return NULL;
+            }
+            map[count] = line;  // zapamiętujemy wczytaną linię
+            int len = strlen(line);
+            if (len > max_width)
+                max_width = len;
+            count++;
+        } else {
+            free(line);
+        }
+    }
+    close(fd);
+    
+    // Dodajemy NULL jako znacznik końca tablicy
+    map = realloc(map, sizeof(char *) * (count + 1));
+    map[count] = NULL;
+    
+    *height = count;
+    *width = max_width;
+    return map;
+}
+
+// Funkcja sprawdzająca granice dla każdej komórki '0' w mapie.
+// Dla każdej '0' sprawdzamy jej 8 sąsiadów (w tym przekątne).
+// Jeśli którykolwiek sąsiad nie należy do zbioru dozwolonych znaków,
+// wypisujemy błąd i zwracamy 1.
+int ft_check_map_boundaries(char **map, int height, int max_width) {
+    (void)max_width;
+    for (int y = 0; y < height; y++) {
+        int row_len = strlen(map[y]);
+        for (int x = 0; x < row_len; x++) {
+            if (map[y][x] == '0') {
+                // Sprawdzamy wszystkich 8 sąsiadów
+                for (int dy = -1; dy <= 1; dy++) {
+                    for (int dx = -1; dx <= 1; dx++) {
+                        if (dy == 0 && dx == 0)
+                            continue; // pomijamy samą komórkę
+                        int ny = y + dy;
+                        int nx = x + dx;
+                        char neighbor;
+                        // Jeśli indeksy są poza zakresem mapy, traktujemy to jako spację
+                        if (ny < 0 || ny >= height)
+                            neighbor = ' ';
+                        else {
+                            int neighbor_len = strlen(map[ny]);
+                            if (nx < 0 || nx >= neighbor_len)
+                                neighbor = ' ';
+                            else
+                                neighbor = map[ny][nx];
+                        }
+                        // Dozwolone znaki: '1', '0', 'N', 'S', 'W', 'E'
+                        if (neighbor != '1' && neighbor != '0' &&
+                            neighbor != 'N' && neighbor != 'S' &&
+                            neighbor != 'W' && neighbor != 'E')
+                        {
+                            printf("Error: Missing boundary\n");
+                            return 1;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    return 0;
+}
 
 int	main(int argc, char **argv)
 {
@@ -154,6 +267,30 @@ int	main(int argc, char **argv)
         ft_check_map_characters(argv[1]) ||
         ft_check_map_player_count(argv[1]))
         return 1;
-    //new_window(&game, argv[1]);
-	return 0;
+    // Wczytujemy linie mapy do tablicy, ustalając jej wysokość i szerokość
+    int height, width;
+    char **map = ft_get_map_lines(argv[1], &height, &width);
+    if (!map)
+        return 1;
+
+    // Sprawdzamy, czy mapa jest zamknięta ścianami, tzn. czy każde '0'
+    // ma poprawnych 8 sąsiadów (1, 0, N, S, W, E).
+    if (ft_check_map_boundaries(map, height, width))
+    {
+        // Zwolnienie pamięci w przypadku błędu
+        for (int i = 0; i < height; i++)
+            free(map[i]);
+        free(map);
+        return 1;
+    }
+
+    // Jeśli wszystkie testy przeszły poprawnie, można przejść do dalszego działania,
+    // np. otwarcia okna gry
+    // new_window(&game, argv[1]);
+
+    // Zwolnienie pamięci po zakończeniu sprawdzania
+    for (int i = 0; i < height; i++)
+        free(map[i]);
+    free(map);
+    return 0;
 }
