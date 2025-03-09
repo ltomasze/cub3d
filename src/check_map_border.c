@@ -6,7 +6,7 @@
 /*   By: ltomasze <ltomasze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/08 18:19:41 by ltomasze          #+#    #+#             */
-/*   Updated: 2025/03/08 18:20:45 by ltomasze         ###   ########.fr       */
+/*   Updated: 2025/03/09 12:47:54 by ltomasze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -150,7 +150,7 @@ int ft_check_floor_border(char **map, int height, int max_width)
                                 neighbor != 'N' && neighbor != 'S' &&
                                 neighbor != 'W' && neighbor != 'E')
                             {
-                                printf("Error: Missing boundary\n");
+                                printf("Error: Missing border for floor\n");
                                 return 1;
                             }
                         }
