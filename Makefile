@@ -6,11 +6,11 @@
 #    By: ltomasze <ltomasze@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/02/22 13:48:19 by ltomasze          #+#    #+#              #
-#    Updated: 2025/03/09 13:45:20 by ltomasze         ###   ########.fr        #
+#    Updated: 2025/03/09 14:07:40 by ltomasze         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = cub3d
+NAME = cub3D
 SOURCES = src/get_next_line.c src/main.c \
 src/check_tcm.c src/check_map_is_last.c src/check_map_vertical_integrity.c \
 src/check_map_characters.c src/check_map_player_count.c\
