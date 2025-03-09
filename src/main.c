@@ -6,7 +6,7 @@
 /*   By: ltomasze <ltomasze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/22 15:45:26 by ltomasze          #+#    #+#             */
-/*   Updated: 2025/03/08 18:22:02 by ltomasze         ###   ########.fr       */
+/*   Updated: 2025/03/09 13:20:28 by ltomasze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,6 +135,7 @@ void new_window(t_game *game, const char *map_file)
     mlx_key_hook(game->win, handle_key, game);
     mlx_loop(game->mlx);
 }*/
+
 
 
 int	main(int argc, char **argv)

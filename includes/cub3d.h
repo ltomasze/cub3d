@@ -6,7 +6,7 @@
 /*   By: ltomasze <ltomasze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/22 15:16:49 by ltomasze          #+#    #+#             */
-/*   Updated: 2025/03/08 18:21:50 by ltomasze         ###   ########.fr       */
+/*   Updated: 2025/03/09 13:25:33 by ltomasze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,5 +48,7 @@ int ft_check_map_player_count(const char *filename);
 int ft_get_map_height(char **map);
 int ft_get_map_width(char **map);
 char **ft_get_map_lines(const char *filename, int *height, int *width);
+int ft_check_floor_border(char **map, int height, int max_width);
 void ft_free_map(char **map, int height);
+int ft_check_player_border(char **map, int height);
 int ft_check_map_border(const char *filename);

@@ -6,7 +6,7 @@
 /*   By: ltomasze <ltomasze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/08 18:19:41 by ltomasze          #+#    #+#             */
-/*   Updated: 2025/03/09 12:47:54 by ltomasze         ###   ########.fr       */
+/*   Updated: 2025/03/09 13:21:12 by ltomasze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -177,13 +177,65 @@ void ft_free_map(char **map, int height)
     free(map);
 }
 
+int ft_check_player_border(char **map, int height)
+{
+    int y = 0;
+    while (y < height)
+    {
+        int row_len = ft_strlen(map[y]);
+        int x = 0;
+        while (x < row_len)
+        {
+            if (map[y][x] == 'N' || map[y][x] == 'W' ||
+                map[y][x] == 'E' || map[y][x] == 'S')
+            {
+                int dy = -1;
+                while (dy <= 1)
+                {
+                    int dx = -1;
+                    while (dx <= 1)
+                    {
+                        if (!(dy == 0 && dx == 0)) // Pomijamy środek (gracza)
+                        {
+                            int ny = y + dy;
+                            int nx = x + dx;
+                            char neighbor;
+                            if (ny < 0 || ny >= height)
+                                neighbor = ' '; // Poza mapą -> błąd
+                            else
+                            {
+                                int neighbor_len = ft_strlen(map[ny]);
+                                if (nx < 0 || nx >= neighbor_len)
+                                    neighbor = ' '; // Poza mapą -> błąd
+                                else
+                                    neighbor = map[ny][nx];
+                            }
+                            if (neighbor != '0' && neighbor != '1')
+                            {
+                                printf("Error: Player is not properly enclosed at (%d, %d)\n", y, x);
+                                return 1;
+                            }
+                        }
+                        dx++;
+                    }
+                    dy++;
+                }
+            }
+            x++;
+        }
+        y++;
+    }
+    return 0;
+}
+
 int ft_check_map_border(const char *filename)
 {
     int height, width;
     char **map = ft_get_map_lines(filename, &height, &width);
     if (!map)
         return 1;
-    if (ft_check_floor_border(map, height, width))
+    if (ft_check_floor_border(map, height, width) ||
+        ft_check_player_border(map, height))
     {
         ft_free_map(map, height);
         return 1;
