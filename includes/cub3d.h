@@ -6,7 +6,7 @@
 /*   By: ltomasze <ltomasze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/22 15:16:49 by ltomasze          #+#    #+#             */
-/*   Updated: 2025/03/09 13:25:33 by ltomasze         ###   ########.fr       */
+/*   Updated: 2025/03/09 13:46:41 by ltomasze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,8 @@ int ft_is_map_line(char *line);
 int ft_check_tcm(const char *filename);
 //check_map_is_last.c
 int ft_check_map_is_last(const char *filename);
-//check_map_vertical.c
-int ft_check_map_vertical(const char *filename);
+//check_map_vertical_integrity.c
+int ft_check_map_vertical_integrity(const char *filename);
 //check_map_characters.c
 int ft_check_map_line_chars(const char *line);
 int ft_check_map_characters(const char *filename);
