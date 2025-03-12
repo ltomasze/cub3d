@@ -6,7 +6,7 @@
 /*   By: ltomasze <ltomasze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/22 15:16:49 by ltomasze          #+#    #+#             */
-/*   Updated: 2025/03/09 13:46:41 by ltomasze         ###   ########.fr       */
+/*   Updated: 2025/03/12 13:20:06 by ltomasze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,9 @@ typedef struct s_game
 */
 //get_next_line.c
 char	*get_next_line(int fd);
+//ft_check_line.c
+int ft_is_tcmnl_line(char *line);
+int ft_check_line(const char *filename);
 //check_tcm.c
 char *ft_skip_whitespaces(char *line);
 int ft_is_texture_line(char *line);
