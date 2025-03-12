@@ -1,4 +1,4 @@
-NO textures/blue_stone.xpm
+NO         textures/cat/cat_0.xpm       
 
 
 SO textures/color_stone.xpm
@@ -24,5 +24,3 @@ C 0,0,0
 110000011101010111110111100111
 11110111111101011101111010001
 11111111111111111111111111111
-
-EA textures/eagle.xpm
