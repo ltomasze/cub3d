@@ -6,7 +6,7 @@
 /*   By: ltomasze <ltomasze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/22 15:45:26 by ltomasze          #+#    #+#             */
-/*   Updated: 2025/03/12 13:22:04 by ltomasze         ###   ########.fr       */
+/*   Updated: 2025/03/12 14:03:52 by ltomasze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,17 @@
 
 int ft_check_args(int argc, char **argv)
 {
-	if(argc != 2)
-		return(printf("Error: wrong number of arguments.\n"), 1);
-	int len;
-	len = ft_strlen(argv[1]);
-	if(len < 4 || ft_strncmp(argv[1] + len - 4, ".cub", len) != 0)
-		return(printf("Error: wrong file extension, expected '.cub'.\n"), 1);
-	int fd = open(argv[1], O_RDONLY);
-	if(fd == - 1)
-		return(printf("Error: file does not exist.\n"), 1);
-	close(fd);
-	return 0;
+    if (argc != 2)
+        return (printf("Error: wrong number of arguments.\n"), 1);
+    int len;
+    len = ft_strlen(argv[1]);
+    if (len < 4 || ft_strncmp(argv[1] + len - 4, ".cub", len) != 0)
+        return (printf("Error: wrong file extension, expected '.cub'.\n"), 1);
+    int fd = open(argv[1], O_RDONLY);
+    if (fd == -1)
+        return (printf("Error: file does not exist.\n"), 1);
+    close(fd);
+    return 0;
 }
 /*
 int handle_key(int key, t_game *game)
@@ -78,7 +78,7 @@ void draw_map(t_game *game)
 {
     int x, y;
     int tile_size = 32;
-    
+
     for (y = 0; game->map[y] != NULL; y++) // Iteracja po liniach mapy
     {
         int x_offset = 0;
@@ -136,25 +136,67 @@ void new_window(t_game *game, const char *map_file)
     mlx_loop(game->mlx);
 }*/
 
-
-
-int	main(int argc, char **argv)
+int ft_check_unique_lines(const char *filename)
 {
-    //t_game game;
+    int fd = open(filename, O_RDONLY);
+    if (fd == -1)
+    {
+        printf("Error: Cannot open file %s\n", filename);
+        return 1;
+    }
 
-	if(ft_check_args(argc, argv))
-	{
-		printf("Usage: ./cub3d maps/<map_file.cub>\n");
-		return 1;
-	}
-	if(ft_check_line(argv[1]) ||
+    char *line;
+    int count_no = 0, count_so = 0, count_we = 0, count_ea = 0, count_f = 0, count_c = 0;
+
+    while ((line = get_next_line(fd)) != NULL)
+    {
+        char *trim_line = ft_skip_whitespaces(line);
+
+        if (ft_strncmp(trim_line, "NO", 2) == 0)
+            count_no++;
+        else if (ft_strncmp(trim_line, "SO", 2) == 0)
+            count_so++;
+        else if (ft_strncmp(trim_line, "WE", 2) == 0)
+            count_we++;
+        else if (ft_strncmp(trim_line, "EA", 2) == 0)
+            count_ea++;
+        else if (trim_line[0] == 'F')
+            count_f++;
+        else if (trim_line[0] == 'C')
+            count_c++;
+
+        free(line);
+    }
+    close(fd);
+
+    if (count_no != 1 || count_so != 1 || count_we != 1 || count_ea != 1 || count_f != 1 || count_c != 1)
+    {
+        printf("Error: Incorrect number of texture/color lines (NO: %d, SO: %d, WE: %d, EA: %d, F: %d, C: %d)\n",
+               count_no, count_so, count_we, count_ea, count_f, count_c);
+        return 1;
+    }
+
+    return 0;
+}
+
+int main(int argc, char **argv)
+{
+    // t_game game;
+
+    if (ft_check_args(argc, argv))
+    {
+        printf("Usage: ./cub3d maps/<map_file.cub>\n");
+        return 1;
+    }
+    if (ft_check_line(argv[1]) ||
         ft_check_tcm(argv[1]) ||
+        ft_check_unique_lines(argv[1]) ||
         ft_check_map_is_last(argv[1]) ||
         ft_check_map_vertical_integrity(argv[1]) ||
         ft_check_map_characters(argv[1]) ||
         ft_check_map_player_count(argv[1]) ||
         ft_check_map_border(argv[1]))
         return 1;
-    //new_window(&game, argv[1]);
+    // new_window(&game, argv[1]);
     return 0;
 }

@@ -1,8 +1,8 @@
 NO textures/blue_stone.xpm
 SO textures/color_stone.xpm
-5
 WE textures/grey_stone.xpm
 EA textures/eagle.xpm
+SO textures/color_stone.xpm
 
 F 150,75,0
 C 0,0,0
