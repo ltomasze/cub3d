@@ -6,7 +6,7 @@
 /*   By: ltomasze <ltomasze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/22 15:16:49 by ltomasze          #+#    #+#             */
-/*   Updated: 2025/03/12 13:20:06 by ltomasze         ###   ########.fr       */
+/*   Updated: 2025/03/12 15:07:29 by ltomasze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,8 @@ int ft_is_texture_line(char *line);
 int ft_is_color_line(char *line);
 int ft_is_map_line(char *line);
 int ft_check_tcm(const char *filename);
+//ft_check_only_one_tc.c
+int ft_check_only_one_tc(const char *filename);
 //check_map_is_last.c
 int ft_check_map_is_last(const char *filename);
 //check_map_vertical_integrity.c
