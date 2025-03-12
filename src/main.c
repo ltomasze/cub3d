@@ -6,7 +6,7 @@
 /*   By: ltomasze <ltomasze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/22 15:45:26 by ltomasze          #+#    #+#             */
-/*   Updated: 2025/03/12 14:03:52 by ltomasze         ###   ########.fr       */
+/*   Updated: 2025/03/12 15:02:15 by ltomasze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,7 +136,7 @@ void new_window(t_game *game, const char *map_file)
     mlx_loop(game->mlx);
 }*/
 
-int ft_check_unique_lines(const char *filename)
+int ft_check_only_one_tc(const char *filename)
 {
     int fd = open(filename, O_RDONLY);
     if (fd == -1)
@@ -190,7 +190,7 @@ int main(int argc, char **argv)
     }
     if (ft_check_line(argv[1]) ||
         ft_check_tcm(argv[1]) ||
-        ft_check_unique_lines(argv[1]) ||
+        ft_check_only_one_tc(argv[1]) ||
         ft_check_map_is_last(argv[1]) ||
         ft_check_map_vertical_integrity(argv[1]) ||
         ft_check_map_characters(argv[1]) ||
