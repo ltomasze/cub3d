@@ -1,6 +1,6 @@
 NO         textures/cat/cat_0.xpm       
 
-F 150, 75, 0 a
+F 150, 75, 256
 SO textures/color_stone.xpm
 
 WE textures/grey_stone.xpm
