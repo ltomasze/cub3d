@@ -1,13 +1,13 @@
 NO         textures/cat/cat_0.xpm       
 
-
+F 150,75,0
 SO textures/color_stone.xpm
 
 WE textures/grey_stone.xpm
 EA textures/eagle.xpm
 
 
-F 150,75,0
+
 C 0,0,0
 
         1111111111111111111111111
