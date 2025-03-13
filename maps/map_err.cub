@@ -1,9 +1,9 @@
 NO         textures/cat/cat_0.xpm       
 
-F 150,75,0
+F 150, 75, 0 a
 SO textures/color_stone.xpm
 
-WE textures/grey_stne.xpm
+WE textures/grey_stone.xpm
 EA textures/eagle.xpm
 
 
