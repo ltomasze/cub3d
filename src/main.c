@@ -6,7 +6,7 @@
 /*   By: ltomasze <ltomasze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/22 15:45:26 by ltomasze          #+#    #+#             */
-/*   Updated: 2025/03/12 17:54:33 by ltomasze         ###   ########.fr       */
+/*   Updated: 2025/03/13 12:41:40 by ltomasze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,6 +138,11 @@ void new_window(t_game *game, const char *map_file)
 
 int check_path_exists(const char *path)
 {
+    if (ft_strlen(path) >= 1023)
+    {
+        printf("Error: Path too long\n");
+        return 1;
+    }
     char trimmed[1024];
     int i = 0;
     // Skopiuj oryginalną ścieżkę do bufora 'trimmed'
