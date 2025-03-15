@@ -6,7 +6,7 @@
 /*   By: ltomasze <ltomasze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 14:49:36 by ltomasze          #+#    #+#             */
-/*   Updated: 2025/03/15 15:06:57 by ltomasze         ###   ########.fr       */
+/*   Updated: 2025/03/15 15:28:36 by ltomasze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,10 +67,26 @@ int	ft_is_valid_color_line(char *line)
 	return (0);
 }
 
+int	ft_check_color_value(char **line)
+{
+	int	value;
+
+	*line = ft_skip_whitespaces(*line);
+	value = ft_atoi(*line);
+	if (value < 0 || value > 255)
+	{
+		printf("Error: Color %d is out of range (0-255)\n", value);
+		return (1);
+	}
+	while (**line >= '0' && **line <= '9')
+		(*line)++;
+	*line = ft_skip_whitespaces(*line);
+	return (0);
+}
+
 int	ft_check_color_range(char *line)
 {
 	int	i;
-	int	value;
 
 	i = 0;
 	line = ft_skip_whitespaces(line);
@@ -80,16 +96,8 @@ int	ft_check_color_range(char *line)
 	line = ft_skip_whitespaces(line);
 	while (i < 3)
 	{
-		line = ft_skip_whitespaces(line);
-		value = ft_atoi(line);
-		if (value < 0 || value > 255)
-		{
-			printf("Error: Color %d is out of range (0-255)\n", value);
+		if (ft_check_color_value(&line))
 			return (1);
-		}
-		while (*line >= '0' && *line <= '9')
-			line++;
-		line = ft_skip_whitespaces(line);
 		if (i < 2)
 		{
 			if (*line == ',')
