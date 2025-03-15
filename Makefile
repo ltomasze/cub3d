@@ -6,7 +6,7 @@
 #    By: ltomasze <ltomasze@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/02/22 13:48:19 by ltomasze          #+#    #+#              #
-#    Updated: 2025/03/13 15:36:10 by ltomasze         ###   ########.fr        #
+#    Updated: 2025/03/15 15:04:36 by ltomasze         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,6 +22,7 @@ src/check_map_vertical_integrity.c \
 src/check_map_characters.c \
 src/check_map_player_count.c \
 src/check_map_border.c \
+src/check_utils.c \
 
 OBJECTS = $(SOURCES:%.c=%.o)
 CC = cc

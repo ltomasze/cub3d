@@ -6,7 +6,7 @@
 /*   By: ltomasze <ltomasze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 14:49:36 by ltomasze          #+#    #+#             */
-/*   Updated: 2025/03/13 17:07:40 by ltomasze         ###   ########.fr       */
+/*   Updated: 2025/03/15 15:06:57 by ltomasze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,13 +107,11 @@ int	ft_check_colours(const char *filename)
 	char	*line;
 	char	*trim;
 
-	fd = open(filename, O_RDONLY);
+	fd = ft_open_file(filename);
 	if (fd == -1)
-	{
-		printf("Error: Could not open file %s\n", filename);
 		return (1);
-	}
-	while ((line = get_next_line(fd)) != NULL)
+	line = get_next_line(fd);
+	while (line != NULL)
 	{
 		trim = ft_skip_whitespaces(line);
 		if (*trim == 'F' || *trim == 'C')
@@ -126,6 +124,7 @@ int	ft_check_colours(const char *filename)
 			}
 		}
 		free(line);
+		line = get_next_line(fd);
 	}
 	close(fd);
 	return (0);
