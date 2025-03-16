@@ -6,7 +6,7 @@
 /*   By: ltomasze <ltomasze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/08 18:19:41 by ltomasze          #+#    #+#             */
-/*   Updated: 2025/03/16 15:54:34 by ltomasze         ###   ########.fr       */
+/*   Updated: 2025/03/16 17:03:14 by ltomasze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,43 +105,6 @@ char	**ft_process_map_lines(int fd, int *height, int *width)
 	return (map);
 }
 
-/*char	**ft_process_map_lines(int fd, int *height, int *width)
-{
-	char		**map;
-	char		*line;
-	int			map_started;
-	size_t		max_width;
-
-	map = NULL;
-	map_started = 0;
-	*height = 0;
-	max_width = 0;
-	line = get_next_line(fd);
-	while (line != NULL)
-	{
-		if (!map_started && ft_is_map_line(line))
-			map_started = 1;
-		if (map_started)
-		{
-			if (line[0] == '\n' || line[0] == '\0')
-			{
-				free(line);
-				break ;
-			}
-			map = ft_add_line_to_map(map, line, height);
-			if (!map)
-				return (NULL);
-			if (ft_strlen(line) > max_width)
-				max_width = ft_strlen(line);
-		}
-		else
-			free(line);
-		line = get_next_line(fd);
-	}
-	*width = max_width;
-	return (map);
-}*/
-
 char	**ft_get_map_lines(const char *filename, int *height, int *width)
 {
 	int		fd;
@@ -157,18 +120,21 @@ char	**ft_get_map_lines(const char *filename, int *height, int *width)
 
 char	ft_check_neighbor(t_pos_in_map pos)
 {
-    int ny = pos.y + pos.dy;
-    int nx = pos.x + pos.dx;
-    char neighbor = ' ';
+	int		ny;
+	int		nx;
+	char	neighbor;
+	int		neighbor_len;
 
-    if (ny >= 0 && ny < pos.height)
-    {
-        int neighbor_len = ft_strlen(pos.map[ny]);
-        if (nx >= 0 && nx < neighbor_len)
-            neighbor = pos.map[ny][nx];
-    }
-
-    return neighbor;
+	ny = pos.y + pos.dy;
+	nx = pos.x + pos.dx;
+	neighbor = ' ';
+	if (ny >= 0 && ny < pos.height)
+	{
+		neighbor_len = ft_strlen(pos.map[ny]);
+		if (nx >= 0 && nx < neighbor_len)
+			neighbor = pos.map[ny][nx];
+	}
+	return (neighbor);
 }
 
 int	ft_check_neighbors(char **map, int height, int y, int x)
