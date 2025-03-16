@@ -6,7 +6,7 @@
 /*   By: ltomasze <ltomasze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/08 18:19:41 by ltomasze          #+#    #+#             */
-/*   Updated: 2025/03/16 13:24:20 by ltomasze         ###   ########.fr       */
+/*   Updated: 2025/03/16 15:23:33 by ltomasze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,41 @@ char	**ft_add_line_to_map(char **map, char *line, int *count)
 	return (tmp);
 }
 
+void	ft_process_map_line(char ***map, char *line, int *height, size_t *max_width)
+{
+	if (line[0] == '\n' || line[0] == '\0')
+	{
+		free(line);
+		return ;
+	}
+	*map = ft_add_line_to_map(*map, line, height);
+	if (ft_strlen(line) > *max_width)
+		*max_width = ft_strlen(line);
+}
+
 char	**ft_process_map_lines(int fd, int *height, int *width)
+{
+	char		**map;
+	char		*line;
+	size_t		max_width;
+
+	map = NULL;
+	*height = 0;
+	max_width = 0;
+	line = get_next_line(fd);
+	while (line != NULL)
+	{
+		if (ft_is_map_line(line))
+			ft_process_map_line(&map, line, height, &max_width);
+		else
+			free(line);
+		line = get_next_line(fd);
+	}
+	*width = max_width;
+	return (map);
+}
+
+/*char	**ft_process_map_lines(int fd, int *height, int *width)
 {
 	char		**map;
 	char		*line;
@@ -105,7 +139,7 @@ char	**ft_process_map_lines(int fd, int *height, int *width)
 	}
 	*width = max_width;
 	return (map);
-}
+}*/
 
 char	**ft_get_map_lines(const char *filename, int *height, int *width)
 {
