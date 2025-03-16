@@ -6,7 +6,7 @@
 /*   By: ltomasze <ltomasze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/08 18:19:41 by ltomasze          #+#    #+#             */
-/*   Updated: 2025/03/16 15:23:33 by ltomasze         ###   ########.fr       */
+/*   Updated: 2025/03/16 15:40:01 by ltomasze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,8 @@ char	**ft_add_line_to_map(char **map, char *line, int *count)
 	return (tmp);
 }
 
-void	ft_process_map_line(char ***map, char *line, int *height, size_t *max_width)
+void	ft_process_map_line(char ***map, char *line, int *height,
+	size_t *max_width)
 {
 	if (line[0] == '\n' || line[0] == '\0')
 	{
@@ -154,7 +155,71 @@ char	**ft_get_map_lines(const char *filename, int *height, int *width)
 	return (map);
 }
 
-int ft_check_floor_border(char **map, int height, int max_width)
+char	ft_check_neighbor(char **map, int height, int y, int x, int dy, int dx)
+{
+    int ny = y + dy;
+    int nx = x + dx;
+    char neighbor = ' ';
+
+    if (ny >= 0 && ny < height)
+    {
+        int neighbor_len = ft_strlen(map[ny]);
+        if (nx >= 0 && nx < neighbor_len)
+            neighbor = map[ny][nx];
+    }
+
+    return neighbor;
+}
+
+int	ft_check_neighbors(char **map, int height, int y, int x)
+{
+    int dy = -1;
+    while (dy <= 1)
+    {
+        int dx = -1;
+        while (dx <= 1)
+        {
+            if (!(dy == 0 && dx == 0))
+            {
+                char neighbor = ft_check_neighbor(map, height, y, x, dy, dx);
+                if (neighbor != '1' && neighbor != '0' &&
+                    neighbor != 'N' && neighbor != 'S' &&
+                    neighbor != 'W' && neighbor != 'E')
+                {
+                    printf("Error: Missing border for floor\n");
+                    return (1);
+                }
+            }
+            dx++;
+        }
+        dy++;
+    }
+    return 0;
+}
+
+int	ft_check_floor_border(char **map, int height, int max_width)
+{
+    (void)max_width;
+    int y = 0;
+
+    while (y < height)
+    {
+        int row_len = ft_strlen(map[y]);
+        int x = 0;
+
+        while (x < row_len)
+        {
+            if (map[y][x] == '0' && ft_check_neighbors(map, height, y, x))
+                return (1);
+            x++;
+        }
+        y++;
+    }
+    return 0;
+}
+
+/*
+int	ft_check_floor_border(char **map, int height, int max_width)
 {
     (void)max_width;
     int y = 0;
@@ -205,7 +270,7 @@ int ft_check_floor_border(char **map, int height, int max_width)
         y++;
     }
     return 0;
-}
+}*/
 
 void ft_free_map(char **map, int height)
 {
