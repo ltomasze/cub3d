@@ -6,7 +6,7 @@
 /*   By: ltomasze <ltomasze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/22 15:16:49 by ltomasze          #+#    #+#             */
-/*   Updated: 2025/03/15 17:24:52 by ltomasze         ###   ########.fr       */
+/*   Updated: 2025/03/16 15:54:49 by ltomasze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,16 @@
 #include "../minilibx-linux/mlx.h"
 #include "../minilibx-linux/mlx_int.h"
 #include "../libft/libft.h"
+
+typedef struct s_pos_in_map
+{
+    int y;
+    int x;
+    int dy;
+    int dx;
+    int height;
+    char **map;
+} t_pos_in_map;
 
 //get_next_line.c
 char	*get_next_line(int fd);

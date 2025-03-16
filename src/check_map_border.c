@@ -6,7 +6,7 @@
 /*   By: ltomasze <ltomasze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/08 18:19:41 by ltomasze          #+#    #+#             */
-/*   Updated: 2025/03/16 15:40:01 by ltomasze         ###   ########.fr       */
+/*   Updated: 2025/03/16 15:54:34 by ltomasze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -155,17 +155,17 @@ char	**ft_get_map_lines(const char *filename, int *height, int *width)
 	return (map);
 }
 
-char	ft_check_neighbor(char **map, int height, int y, int x, int dy, int dx)
+char	ft_check_neighbor(t_pos_in_map pos)
 {
-    int ny = y + dy;
-    int nx = x + dx;
+    int ny = pos.y + pos.dy;
+    int nx = pos.x + pos.dx;
     char neighbor = ' ';
 
-    if (ny >= 0 && ny < height)
+    if (ny >= 0 && ny < pos.height)
     {
-        int neighbor_len = ft_strlen(map[ny]);
+        int neighbor_len = ft_strlen(pos.map[ny]);
         if (nx >= 0 && nx < neighbor_len)
-            neighbor = map[ny][nx];
+            neighbor = pos.map[ny][nx];
     }
 
     return neighbor;
@@ -181,7 +181,8 @@ int	ft_check_neighbors(char **map, int height, int y, int x)
         {
             if (!(dy == 0 && dx == 0))
             {
-                char neighbor = ft_check_neighbor(map, height, y, x, dy, dx);
+                t_pos_in_map pos = {y, x, dy, dx, height, map};
+                char neighbor = ft_check_neighbor(pos);
                 if (neighbor != '1' && neighbor != '0' &&
                     neighbor != 'N' && neighbor != 'S' &&
                     neighbor != 'W' && neighbor != 'E')
