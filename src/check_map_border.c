@@ -6,7 +6,7 @@
 /*   By: ltomasze <ltomasze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/08 18:19:41 by ltomasze          #+#    #+#             */
-/*   Updated: 2025/03/16 12:54:06 by ltomasze         ###   ########.fr       */
+/*   Updated: 2025/03/16 13:24:20 by ltomasze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,16 +72,17 @@ char	**ft_add_line_to_map(char **map, char *line, int *count)
 
 char	**ft_process_map_lines(int fd, int *height, int *width)
 {
-	char	**map;
-	char	*line;
-	int		map_started;
+	char		**map;
+	char		*line;
+	int			map_started;
 	size_t		max_width;
 
 	map = NULL;
 	map_started = 0;
 	*height = 0;
 	max_width = 0;
-	while ((line = get_next_line(fd)) != NULL)
+	line = get_next_line(fd);
+	while (line != NULL)
 	{
 		if (!map_started && ft_is_map_line(line))
 			map_started = 1;
@@ -90,7 +91,7 @@ char	**ft_process_map_lines(int fd, int *height, int *width)
 			if (line[0] == '\n' || line[0] == '\0')
 			{
 				free(line);
-				break;
+				break ;
 			}
 			map = ft_add_line_to_map(map, line, height);
 			if (!map)
@@ -100,6 +101,7 @@ char	**ft_process_map_lines(int fd, int *height, int *width)
 		}
 		else
 			free(line);
+		line = get_next_line(fd);
 	}
 	*width = max_width;
 	return (map);
