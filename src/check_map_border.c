@@ -6,111 +6,116 @@
 /*   By: ltomasze <ltomasze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/08 18:19:41 by ltomasze          #+#    #+#             */
-/*   Updated: 2025/03/09 13:21:12 by ltomasze         ###   ########.fr       */
+/*   Updated: 2025/03/16 12:54:06 by ltomasze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
-
-int ft_get_map_height(char **map) 
+int	ft_get_map_height(char **map)
 {
-    int count = 0;
-    while (map[count] != NULL)
-        count++;
-    return count;
+	int	count;
+
+	count = 0;
+	while (map[count] != NULL)
+		count++;
+	return (count);
 }
 
-int ft_get_map_width(char **map)
+int	ft_get_map_width(char **map)
 {
-    int max_width = 0;
-    int i = 0;
-    while (map[i] != NULL)
-    {
-        int len = ft_strlen(map[i]);
-        if (len > max_width)
-            max_width = len;
-        i++;
-    }
-    return max_width;
+	int	max_width;
+	int	i;
+	int	len;
+
+	max_width = 0;
+	i = 0;
+	while (map[i] != NULL)
+	{
+		len = ft_strlen(map[i]);
+		if (len > max_width)
+			max_width = len;
+		i++;
+	}
+	return (max_width);
 }
 
-char **ft_get_map_lines(const char *filename, int *height, int *width) 
+char	**ft_allocate_map(int count)
 {
-    int fd = open(filename, O_RDONLY);
-    if (fd == -1) 
-    {
-        printf("Error: Cannot open file %s\n", filename);
-        return NULL;
-    }
-    
-    char **map = NULL;
-    int count = 0;
-    int max_width = 0;
-    int map_started = 0;
-    char *line = NULL;
-    
-    while ((line = get_next_line(fd)) != NULL) 
-    {
-        if (!map_started && ft_is_map_line(line)) 
-        {
-            map_started = 1;
-        }
-        if (map_started) 
-        {
-            if (line[0] == '\n' || line[0] == '\0')
-            {
-                free(line);
-                break;
-            }
-            char **tmp = malloc(sizeof(char *) * (count + 1));
-            if (!tmp) 
-            {
-                printf("Error: Memory allocation failed\n");
-                close(fd);
-                return NULL;
-            }
-            int i = 0;
-            while (i < count) 
-            {
-                tmp[i] = map[i];
-                i++;
-            }
-            // Zwalniamy starą tablicę (same wskaźniki nie są zwalniane, bo nadal wskazują na zaalokowane linie)
-            free(map);
-            map = tmp;
-            map[count] = line;
-            int len = ft_strlen(line);
-            if (len > max_width)
-                max_width = len;
-            count++;
-        } 
-        else 
-        {
-            free(line);
-        }
-    }
-    close(fd);
-    char **tmp = malloc(sizeof(char *) * (count + 1));
-    if (!tmp) 
-    {
-        printf("Error: Memory allocation failed\n");
-        return NULL;
-    }
-     int i = 0;
-    while (i < count) 
-    {
-        tmp[i] = map[i];
-        i++;
-    }
-    free(map);
-    map = tmp;
-    map[count] = NULL;
-    
-    *height = count;
-    *width = max_width;
-    return map;
-    
+	char	**tmp;
+
+	tmp = malloc(sizeof(char *) * (count + 1));
+	if (!tmp)
+		printf("Error: Memory allocation failed\n");
+	return (tmp);
+}
+
+char	**ft_add_line_to_map(char **map, char *line, int *count)
+{
+	char	**tmp;
+	int		i;
+
+	tmp = ft_allocate_map(*count + 1);
+	if (!tmp)
+		return (NULL);
+	i = 0;
+	while (i < *count)
+	{
+		tmp[i] = map[i];
+		i++;
+	}
+	free(map);
+	tmp[*count] = line;
+	(*count)++;
+	return (tmp);
+}
+
+char	**ft_process_map_lines(int fd, int *height, int *width)
+{
+	char	**map;
+	char	*line;
+	int		map_started;
+	size_t		max_width;
+
+	map = NULL;
+	map_started = 0;
+	*height = 0;
+	max_width = 0;
+	while ((line = get_next_line(fd)) != NULL)
+	{
+		if (!map_started && ft_is_map_line(line))
+			map_started = 1;
+		if (map_started)
+		{
+			if (line[0] == '\n' || line[0] == '\0')
+			{
+				free(line);
+				break;
+			}
+			map = ft_add_line_to_map(map, line, height);
+			if (!map)
+				return (NULL);
+			if (ft_strlen(line) > max_width)
+				max_width = ft_strlen(line);
+		}
+		else
+			free(line);
+	}
+	*width = max_width;
+	return (map);
+}
+
+char	**ft_get_map_lines(const char *filename, int *height, int *width)
+{
+	int		fd;
+	char	**map;
+
+	fd = ft_open_file(filename);
+	if (fd == -1)
+		return (NULL);
+	map = ft_process_map_lines(fd, height, width);
+	close(fd);
+	return (map);
 }
 
 int ft_check_floor_border(char **map, int height, int max_width)
@@ -228,12 +233,13 @@ int ft_check_player_border(char **map, int height)
     return 0;
 }
 
-int ft_check_map_border(const char *filename)
+int	ft_check_map_border(const char *filename)
 {
-    int height, width;
-    char **map = ft_get_map_lines(filename, &height, &width);
-    if (!map)
-        return 1;
+	int	height;
+	int	width;
+	char **map = ft_get_map_lines(filename, &height, &width);
+	if (!map)
+		return (1);
     if (ft_check_floor_border(map, height, width) ||
         ft_check_player_border(map, height))
     {
