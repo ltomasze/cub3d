@@ -6,7 +6,7 @@
 /*   By: ltomasze <ltomasze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/08 18:19:41 by ltomasze          #+#    #+#             */
-/*   Updated: 2025/03/16 17:03:14 by ltomasze         ###   ########.fr       */
+/*   Updated: 2025/03/19 10:15:09 by ltomasze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -185,6 +185,60 @@ int	ft_check_floor_border(char **map, int height, int max_width)
     return 0;
 }
 
+char ft_get_neighbor(char **map, int height, int ny, int nx)
+{
+    if (ny < 0 || ny >= height)
+        return ' '; // Poza mapą -> błąd
+    int neighbor_len = ft_strlen(map[ny]);
+    if (nx < 0 || nx >= neighbor_len)
+        return ' '; // Poza mapą -> błąd
+    return map[ny][nx];
+}
+
+int ft_check_surroundings(char **map, int height, int y, int x)
+{
+    int dy = -1;
+    while (dy <= 1)
+    {
+        int dx = -1;
+        while (dx <= 1)
+        {
+            if (!(dy == 0 && dx == 0)) // Pomijamy środek (gracza)
+            {
+                char neighbor = ft_get_neighbor(map, height, y + dy, x + dx);
+                if (neighbor != '0' && neighbor != '1')
+                {
+                    printf("Error: Player is not properly enclosed at (%d, %d)\n", y, x);
+                    return 1;
+                }
+            }
+            dx++;
+        }
+        dy++;
+    }
+    return 0;
+}
+
+int ft_check_player_border(char **map, int height)
+{
+    int y = 0;
+    while (y < height)
+    {
+        int x = 0;
+        int row_len = ft_strlen(map[y]);
+        while (x < row_len)
+        {
+            if (map[y][x] == 'N' || map[y][x] == 'W' || map[y][x] == 'E' || map[y][x] == 'S')
+            {
+                if (ft_check_surroundings(map, height, y, x))
+                    return 1;
+            }
+            x++;
+        }
+        y++;
+    }
+    return 0;
+}
 /*
 int	ft_check_floor_border(char **map, int height, int max_width)
 {
@@ -250,6 +304,9 @@ void ft_free_map(char **map, int height)
     free(map);
 }
 
+
+
+/*
 int ft_check_player_border(char **map, int height)
 {
     int y = 0;
@@ -299,7 +356,7 @@ int ft_check_player_border(char **map, int height)
         y++;
     }
     return 0;
-}
+}*/
 
 int	ft_check_map_border(const char *filename)
 {
