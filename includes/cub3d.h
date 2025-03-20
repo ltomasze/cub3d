@@ -6,7 +6,7 @@
 /*   By: ltomasze <ltomasze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/22 15:16:49 by ltomasze          #+#    #+#             */
-/*   Updated: 2025/03/20 10:39:04 by ltomasze         ###   ########.fr       */
+/*   Updated: 2025/03/20 11:11:56 by ltomasze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,21 +62,24 @@ int		ft_check_map_characters(const char *filename);
 //check_map_player_count.c
 int		ft_check_map_player_count(const char *filename);
 //check_map_border.c
+char	**ft_get_map_lines(const char *filename, int *height, int *width);
+int		ft_check_floor_border(char **map, int height, int max_width);
+int		ft_check_player_border(char **map, int height);
+void	ft_free_map(char **map, int height);
+int		ft_check_map_border(const char *filename);
+//check_map_border1.c
 int		ft_get_map_height(char **map);
 int		ft_get_map_width(char **map);
+//check_map_border2.c
 char	**ft_allocate_map(int count);
 char	**ft_add_line_to_map(char **map, char *line, int *count);
 void	ft_process_map_line(char ***map, char *line, int *height, size_t *max_width);
 char	**ft_process_map_lines(int fd, int *height, int *width);
-char	**ft_get_map_lines(const char *filename, int *height, int *width);
+//check_map_border3.c
 char	ft_check_ngh_floor(t_pos_in_map pos);
 int		ft_check_dx(t_pos_in_map pos);
 int		ft_check_nghs_floor(char **map, int height, int y, int x);
-int		ft_check_floor_border(char **map, int height, int max_width);
 char	ft_get_ngh_player(char **map, int height, int ny, int nx);
 int		ft_check_nghs_player(char **map, int height, int y, int x);
-void	ft_free_map(char **map, int height);
-int		ft_check_player_border(char **map, int height);
-int		ft_check_map_border(const char *filename);
 //check_utils.c
 int		ft_open_file(const char *filename);
