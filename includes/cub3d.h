@@ -6,7 +6,7 @@
 /*   By: ltomasze <ltomasze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/22 15:16:49 by ltomasze          #+#    #+#             */
-/*   Updated: 2025/03/20 12:35:38 by ltomasze         ###   ########.fr       */
+/*   Updated: 2025/03/20 13:08:38 by ltomasze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,8 @@ int		ft_check_map_line_chars(const char *line);
 int		ft_process2_map_lines(int fd);
 int		ft_check_map_characters(const char *filename);
 //check_map_player_count.c
+int		ft_count_players_in_line(char *line);
+int		ft_process3_map_lines(int fd);
 int		ft_check_map_player_count(const char *filename);
 //check_map_border.c
 char	**ft_get_map_lines(const char *filename, int *height, int *width);
