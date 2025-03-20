@@ -6,7 +6,7 @@
 /*   By: ltomasze <ltomasze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/08 18:19:41 by ltomasze          #+#    #+#             */
-/*   Updated: 2025/03/19 10:15:09 by ltomasze         ###   ########.fr       */
+/*   Updated: 2025/03/20 09:40:23 by ltomasze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,7 +118,7 @@ char	**ft_get_map_lines(const char *filename, int *height, int *width)
 	return (map);
 }
 
-char	ft_check_neighbor(t_pos_in_map pos)
+char	ft_check_ngh_floor(t_pos_in_map pos)
 {
 	int		ny;
 	int		nx;
@@ -137,7 +137,7 @@ char	ft_check_neighbor(t_pos_in_map pos)
 	return (neighbor);
 }
 
-int	ft_check_neighbors(char **map, int height, int y, int x)
+int	ft_check_nghs_floor(char **map, int height, int y, int x)
 {
     int dy = -1;
     while (dy <= 1)
@@ -148,7 +148,7 @@ int	ft_check_neighbors(char **map, int height, int y, int x)
             if (!(dy == 0 && dx == 0))
             {
                 t_pos_in_map pos = {y, x, dy, dx, height, map};
-                char neighbor = ft_check_neighbor(pos);
+                char neighbor = ft_check_ngh_floor(pos);
                 if (neighbor != '1' && neighbor != '0' &&
                     neighbor != 'N' && neighbor != 'S' &&
                     neighbor != 'W' && neighbor != 'E')
@@ -176,7 +176,7 @@ int	ft_check_floor_border(char **map, int height, int max_width)
 
         while (x < row_len)
         {
-            if (map[y][x] == '0' && ft_check_neighbors(map, height, y, x))
+            if (map[y][x] == '0' && ft_check_nghs_floor(map, height, y, x))
                 return (1);
             x++;
         }
@@ -185,17 +185,17 @@ int	ft_check_floor_border(char **map, int height, int max_width)
     return 0;
 }
 
-char ft_get_neighbor(char **map, int height, int ny, int nx)
+char ft_get_ngh_player(char **map, int height, int ny, int nx)
 {
     if (ny < 0 || ny >= height)
-        return ' '; // Poza mapą -> błąd
+        return ' ';
     int neighbor_len = ft_strlen(map[ny]);
     if (nx < 0 || nx >= neighbor_len)
-        return ' '; // Poza mapą -> błąd
+        return ' ';
     return map[ny][nx];
 }
 
-int ft_check_surroundings(char **map, int height, int y, int x)
+int ft_check_nghs_player(char **map, int height, int y, int x)
 {
     int dy = -1;
     while (dy <= 1)
@@ -205,7 +205,7 @@ int ft_check_surroundings(char **map, int height, int y, int x)
         {
             if (!(dy == 0 && dx == 0)) // Pomijamy środek (gracza)
             {
-                char neighbor = ft_get_neighbor(map, height, y + dy, x + dx);
+                char neighbor = ft_get_ngh_player(map, height, y + dy, x + dx);
                 if (neighbor != '0' && neighbor != '1')
                 {
                     printf("Error: Player is not properly enclosed at (%d, %d)\n", y, x);
@@ -230,7 +230,7 @@ int ft_check_player_border(char **map, int height)
         {
             if (map[y][x] == 'N' || map[y][x] == 'W' || map[y][x] == 'E' || map[y][x] == 'S')
             {
-                if (ft_check_surroundings(map, height, y, x))
+                if (ft_check_nghs_player(map, height, y, x))
                     return 1;
             }
             x++;
