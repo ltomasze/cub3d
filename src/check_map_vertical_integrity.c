@@ -6,7 +6,7 @@
 /*   By: ltomasze <ltomasze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/05 14:02:26 by ltomasze          #+#    #+#             */
-/*   Updated: 2025/03/20 14:05:17 by ltomasze         ###   ########.fr       */
+/*   Updated: 2025/03/20 14:15:35 by ltomasze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,38 +63,3 @@ int	ft_check_map_vertical_integrity(const char *filename)
 	close(fd);
 	return (result);
 }
-
-/*int ft_check_map_vertical_integrity(const char *filename)
-{
-    int fd;
-	char *line;
-	int map_started;
-	char *trimmed;
-	
-	fd = ft_open_file(filename);
-	if (fd == -1)
-		return (1);
-    map_started = 0;
-	line = get_next_line(fd);
-	while(line != NULL)
-    {
-        trimmed = ft_skip_whitespaces(line);
-        if (*trimmed == '\0')
-        {
-            free(line);
-            continue;
-        }
-        if (ft_is_map_line(trimmed))
-            map_started = 1;
-        else if (map_started)
-        {
-            free(line);
-            close(fd);
-            printf("Error: Invalid map(wrong char before 1, or new line).\n");
-            return 1;
-        }
-        free(line);
-    }
-    close(fd);
-    return 0;
-}*/
