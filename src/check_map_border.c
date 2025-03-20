@@ -6,7 +6,7 @@
 /*   By: ltomasze <ltomasze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/08 18:19:41 by ltomasze          #+#    #+#             */
-/*   Updated: 2025/03/20 09:48:43 by ltomasze         ###   ########.fr       */
+/*   Updated: 2025/03/20 10:04:12 by ltomasze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,37 +137,45 @@ char	ft_check_ngh_floor(t_pos_in_map pos)
 	return (neighbor);
 }
 
+int	ft_check_dx(t_pos_in_map pos)
+{
+	char	neighbor;
+	int		dx;
+
+	dx = -1;
+	while (dx <= 1)
+	{
+		if (!(pos.dy == 0 && dx == 0))
+		{
+			pos.dx = dx;
+			neighbor = ft_check_ngh_floor(pos);
+			if (neighbor != '1' && neighbor != '0' && neighbor != 'N'
+				&& neighbor != 'S' && neighbor != 'W' && neighbor != 'E')
+			{
+				printf("Error: Missing border for floor\n");
+				return (1);
+			}
+		}
+		dx++;
+	}
+	return (0);
+}
+
 int	ft_check_nghs_floor(char **map, int height, int y, int x)
 {
 	int				dy;
-	int				dx;
 	t_pos_in_map	pos;
-	char			neighbor;
 
 	dy = -1;
 	while (dy <= 1)
 	{
-		dx = -1;
-		while (dx <= 1)
-		{
-			if (!(dy == 0 && dx == 0))
-			{
-				pos.y = y;
-				pos.x = x;
-				pos.dy = dy;
-				pos.dx = dx;
-				pos.height = height;
-				pos.map = map;
-				neighbor = ft_check_ngh_floor(pos);
-				if (neighbor != '1' && neighbor != '0' && neighbor != 'N'
-					&& neighbor != 'S' && neighbor != 'W' && neighbor != 'E')
-				{
-					printf("Error: Missing border for floor\n");
-					return (1);
-				}
-			}
-			dx++;
-		}
+		pos.y = y;
+		pos.x = x;
+		pos.dy = dy;
+		pos.height = height;
+		pos.map = map;
+		if (ft_check_dx(pos))
+			return (1);
 		dy++;
 	}
 	return (0);
@@ -175,26 +183,28 @@ int	ft_check_nghs_floor(char **map, int height, int y, int x)
 
 int	ft_check_floor_border(char **map, int height, int max_width)
 {
-    (void)max_width;
-    int y = 0;
+	int	y;
+	int	row_len;
+	int	x;
 
-    while (y < height)
-    {
-        int row_len = ft_strlen(map[y]);
-        int x = 0;
-
-        while (x < row_len)
-        {
-            if (map[y][x] == '0' && ft_check_nghs_floor(map, height, y, x))
-                return (1);
-            x++;
-        }
-        y++;
-    }
-    return 0;
+	y = 0;
+	(void)max_width;
+	while (y < height)
+	{
+		row_len = ft_strlen(map[y]);
+		x = 0;
+		while (x < row_len)
+		{
+			if (map[y][x] == '0' && ft_check_nghs_floor(map, height, y, x))
+				return (1);
+			x++;
+		}
+		y++;
+	}
+	return (0);
 }
 
-char ft_get_ngh_player(char **map, int height, int ny, int nx)
+char	ft_get_ngh_player(char **map, int height, int ny, int nx)
 {
     if (ny < 0 || ny >= height)
         return ' ';
