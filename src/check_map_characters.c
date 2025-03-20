@@ -6,53 +6,97 @@
 /*   By: ltomasze <ltomasze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 13:31:40 by ltomasze          #+#    #+#             */
-/*   Updated: 2025/03/06 13:32:36 by ltomasze         ###   ########.fr       */
+/*   Updated: 2025/03/20 11:45:11 by ltomasze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
-int ft_check_map_line_chars(const char *line)
+int	ft_check_map_line_chars(const char *line)
 {
-    int i = 0;
-    while (line[i])
-    {
-        if (line[i] != '1' && line[i] != '0' &&
-            line[i] != 'N' && line[i] != 'S' &&
-            line[i] != 'W' && line[i] != 'E' &&
-            line[i] != ' ' && line[i] != '\t' &&
-            line[i] != '\n' && line[i] != '\v' &&
-            line[i] != '\f' && line[i] != '\r')
-            return 1; // Zwracamy 1, gdy znaleziono niedozwolony znak
-        i++;
-    }
-    return 0; // Wszystkie znaki są dozwolone
+	int	i;
+
+	i = 0;
+	while (line[i])
+	{
+		if (line[i] != '1' && line[i] != '0'
+			&& line[i] != 'N' && line[i] != 'S'
+			&& line[i] != 'W' && line[i] != 'E'
+			&& line[i] != ' ' && line[i] != '\t'
+			&& line[i] != '\n' && line[i] != '\v'
+			&& line[i] != '\f' && line[i] != '\r')
+			return (1);
+		i++;
+	}
+	return (0);
 }
 
-int ft_check_map_characters(const char *filename)
+int	ft_process2_map_lines(int fd)
 {
-    int fd = open(filename, O_RDONLY);
-    if (fd == -1)
+	char	*line;
+	char	*trimmed;
+
+	line = get_next_line(fd);
+	while (line != NULL)
+	{
+		trimmed = ft_skip_whitespaces(line);
+		if (*trimmed == '\0')
+		{
+			free(line);
+			line = get_next_line(fd);
+			continue ;
+		}
+		if (ft_is_map_line(trimmed) && ft_check_map_line_chars(trimmed))
+		{
+			free(line);
+			return (1);
+		}
+		free(line);
+		line = get_next_line(fd);
+	}
+	return (0);
+}
+
+int	ft_check_map_characters(const char *filename)
+{
+	int		fd;
+	int		error;
+
+	fd = ft_open_file(filename);
+	if (fd == -1)
+		return (1);
+	error = ft_process2_map_lines(fd);
+	close(fd);
+	if (error)
+	{
+		printf("Error: Map line have forbidden characters.\n");
+		return (1);
+	}
+	return (0);
+}
+
+/*
+int	ft_check_map_characters(const char *filename)
+{
+	int		fd;
+	char	*line;
+	int		error;
+	char	*trimmed;
+
+	fd = ft_open_file(filename);
+	if (fd == -1)
+		return (1);
+	error = 0;
+	line = get_next_line(fd);
+	while (line != NULL)
     {
-        printf("Error: Cannot open file.\n");
-        return 1;
-    }
-    
-    char *line;
-    int error = 0;
-    
-    while ((line = get_next_line(fd)) != NULL)
-    {
-        char *trimmed = ft_skip_whitespaces(line);
-        
-        // Pomijamy puste linie (lub linie zawierające tylko białe znaki)
+        trimmed = ft_skip_whitespaces(line);
         if (*trimmed == '\0')
         {
             free(line);
+			line = get_next_line(fd);
             continue;
         }
-        
-        // Jeśli linia jest linią mapy, sprawdzamy, czy zawiera wyłącznie dozwolone znaki
         if (ft_is_map_line(trimmed))
         {
             if (ft_check_map_line_chars(trimmed))
@@ -62,17 +106,14 @@ int ft_check_map_characters(const char *filename)
                 break;
             }
         }
-        
         free(line);
+		line = get_next_line(fd);
     }
-    
     close(fd);
-    
     if (error)
     {
         printf("Error: Map line have forbidden characters.\n");
         return 1;
     }
-    
     return 0;
-}
+}*/
