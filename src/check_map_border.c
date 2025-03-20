@@ -6,7 +6,7 @@
 /*   By: ltomasze <ltomasze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/08 18:19:41 by ltomasze          #+#    #+#             */
-/*   Updated: 2025/03/20 09:40:23 by ltomasze         ###   ########.fr       */
+/*   Updated: 2025/03/20 09:48:43 by ltomasze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,29 +139,38 @@ char	ft_check_ngh_floor(t_pos_in_map pos)
 
 int	ft_check_nghs_floor(char **map, int height, int y, int x)
 {
-    int dy = -1;
-    while (dy <= 1)
-    {
-        int dx = -1;
-        while (dx <= 1)
-        {
-            if (!(dy == 0 && dx == 0))
-            {
-                t_pos_in_map pos = {y, x, dy, dx, height, map};
-                char neighbor = ft_check_ngh_floor(pos);
-                if (neighbor != '1' && neighbor != '0' &&
-                    neighbor != 'N' && neighbor != 'S' &&
-                    neighbor != 'W' && neighbor != 'E')
-                {
-                    printf("Error: Missing border for floor\n");
-                    return (1);
-                }
-            }
-            dx++;
-        }
-        dy++;
-    }
-    return 0;
+	int				dy;
+	int				dx;
+	t_pos_in_map	pos;
+	char			neighbor;
+
+	dy = -1;
+	while (dy <= 1)
+	{
+		dx = -1;
+		while (dx <= 1)
+		{
+			if (!(dy == 0 && dx == 0))
+			{
+				pos.y = y;
+				pos.x = x;
+				pos.dy = dy;
+				pos.dx = dx;
+				pos.height = height;
+				pos.map = map;
+				neighbor = ft_check_ngh_floor(pos);
+				if (neighbor != '1' && neighbor != '0' && neighbor != 'N'
+					&& neighbor != 'S' && neighbor != 'W' && neighbor != 'E')
+				{
+					printf("Error: Missing border for floor\n");
+					return (1);
+				}
+			}
+			dx++;
+		}
+		dy++;
+	}
+	return (0);
 }
 
 int	ft_check_floor_border(char **map, int height, int max_width)
@@ -295,7 +304,9 @@ int	ft_check_floor_border(char **map, int height, int max_width)
 
 void ft_free_map(char **map, int height)
 {
-    int i = 0;
+    int	i;
+	
+	i = 0;
     while (i < height)
     {
         free(map[i]);
