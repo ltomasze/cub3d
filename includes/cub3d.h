@@ -6,7 +6,7 @@
 /*   By: ltomasze <ltomasze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/22 15:16:49 by ltomasze          #+#    #+#             */
-/*   Updated: 2025/03/22 17:01:52 by ltomasze         ###   ########.fr       */
+/*   Updated: 2025/03/22 17:06:56 by ltomasze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ typedef struct s_pos_in_map
 
 //get_next_line.c
 char	*get_next_line(int fd);
-//ft_check_line.c
+//check_line.c
 int		ft_is_tcmnl_line(char *line);
 int		ft_check_line(const char *filename);
 //check_tcm.c
@@ -40,11 +40,11 @@ int		ft_check_tcm(const char *filename);
 int		ft_is_texture_line(char *line);
 int		ft_is_color_line(char *line);
 int		ft_is_map_line(char *line);
-//ft_check_only_one_tc.c
+//check_only_one_tc.c
 int		ft_check_only_one_tc(const char *filename);
 int		ft_check_only_textures(const char *filename);
 int		ft_check_only_colors(const char *filename);
-//ft_check_only_one_tc1.c
+//check_only_one_tc1.c
 int		ft_check_texture_count(int no, int so, int we, int ea);
 int		ft_check_color_count(int f, int c);
 int		ft_process_no_so_lines(const char *filename, int *no, int *so);
