@@ -6,7 +6,7 @@
 /*   By: ltomasze <ltomasze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/22 15:16:49 by ltomasze          #+#    #+#             */
-/*   Updated: 2025/03/20 14:06:38 by ltomasze         ###   ########.fr       */
+/*   Updated: 2025/03/22 14:50:26 by ltomasze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,14 @@ int		ft_is_map_line(char *line);
 int		ft_check_tcm(const char *filename);
 //ft_check_only_one_tc.c
 int		ft_check_only_one_tc(const char *filename);
+int		ft_check_only_textures(const char *filename);
+int		ft_check_only_colors(const char *filename);
+//ft_check_only_one_tc1.c
+int		ft_check_texture_count(int no, int so, int we, int ea);
+int		ft_check_color_count(int f, int c);
+int		ft_process_no_so_lines(const char *filename, int *no, int *so);
+int		ft_process_we_ea_lines(const char *filename, int *we, int *ea);
+int		ft_process_color_lines(const char *filename, int *f, int *c);
 //check_textures.c
 int		check_path_exists(const char *path);
 int		ft_check_textures(const char *filename);
