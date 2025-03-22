@@ -6,7 +6,7 @@
 /*   By: ltomasze <ltomasze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/22 15:16:49 by ltomasze          #+#    #+#             */
-/*   Updated: 2025/03/22 15:26:16 by ltomasze         ###   ########.fr       */
+/*   Updated: 2025/03/22 17:01:52 by ltomasze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,14 @@ int		ft_process_no_so_lines(const char *filename, int *no, int *so);
 int		ft_process_we_ea_lines(const char *filename, int *we, int *ea);
 int		ft_process_color_lines(const char *filename, int *f, int *c);
 //check_textures.c
+void	ft_trim_whitespace_end_tx(char *trimmed);
+int		ft_trim_path_tx(const char *path, char *trimmed);
+int		check_path_exists(const char *path);
 int		check_path_exists(const char *path);
 int		ft_check_textures(const char *filename);
+//check_textures1.c
+int		ft_check_directory(const char *trimmed);
+int		ft_check_xpm_file(const char *trimmed, int len);
 //check_colours.c
 int		ft_parse_color_line(char **line, int *count_numbers, int *count_commas);
 int		ft_is_valid_color_line(char *line);

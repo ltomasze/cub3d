@@ -6,7 +6,7 @@
 #    By: ltomasze <ltomasze@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/02/22 13:48:19 by ltomasze          #+#    #+#              #
-#    Updated: 2025/03/22 15:26:28 by ltomasze         ###   ########.fr        #
+#    Updated: 2025/03/22 17:02:58 by ltomasze         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,6 +18,7 @@ src/check_tcm1.c \
 src/check_only_one_tc.c \
 src/check_only_one_tc1.c \
 src/check_textures.c \
+src/check_textures1.c \
 src/check_colours.c \
 src/check_colours1.c \
 src/check_map_is_last.c \
