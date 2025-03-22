@@ -6,7 +6,7 @@
 /*   By: ltomasze <ltomasze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/22 15:16:49 by ltomasze          #+#    #+#             */
-/*   Updated: 2025/03/22 17:06:56 by ltomasze         ###   ########.fr       */
+/*   Updated: 2025/03/22 17:45:46 by ltomasze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,22 +19,27 @@
 
 typedef struct s_pos_in_map
 {
-    int y;
-    int x;
-    int dy;
-    int dx;
-    int height;
-    char **map;
-} t_pos_in_map;
+	int		y;
+	int		x;
+	int		dy;
+	int		dx;
+	int		height;
+	char	**map;
+}	t_pos_in_map;
 
 //get_next_line.c
 char	*get_next_line(int fd);
+//DIRECTORY CHECK
+//check.c
+int		ft_check_args(int argc, char **argv);
+int		ft_check(int argc, char **argv);
 //check_line.c
 int		ft_is_tcmnl_line(char *line);
 int		ft_check_line(const char *filename);
 //check_tcm.c
 char	*ft_skip_whitespaces(char *line);
-int		ft_process_tcm_lines(int fd, int *has_texture, int *has_color, int *has_map);
+int		ft_process_tcm_lines(int fd, int *has_texture, int *has_color,
+			int *has_map);
 int		ft_check_tcm(const char *filename);
 //check_tcm1.c
 int		ft_is_texture_line(char *line);
@@ -96,7 +101,8 @@ int		ft_get_map_width(char **map);
 //check_map_border2.c
 char	**ft_allocate_map(int count);
 char	**ft_add_line_to_map(char **map, char *line, int *count);
-void	ft_process_map_line(char ***map, char *line, int *height, size_t *max_width);
+void	ft_process_map_line(char ***map, char *line, int *height,
+			size_t *max_width);
 char	**ft_process_map_lines(int fd, int *height, int *width);
 //check_map_border3.c
 char	ft_check_ngh_floor(t_pos_in_map pos);
