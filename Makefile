@@ -6,7 +6,7 @@
 #    By: ltomasze <ltomasze@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/02/22 13:48:19 by ltomasze          #+#    #+#              #
-#    Updated: 2025/03/22 14:51:15 by ltomasze         ###   ########.fr        #
+#    Updated: 2025/03/22 15:26:28 by ltomasze         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,6 +14,7 @@ NAME = cub3D
 SOURCES = src/get_next_line.c src/main.c \
 src/check_line.c \
 src/check_tcm.c \
+src/check_tcm1.c \
 src/check_only_one_tc.c \
 src/check_only_one_tc1.c \
 src/check_textures.c \
