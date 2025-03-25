@@ -6,7 +6,7 @@
 /*   By: ltomasze <ltomasze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/08 18:19:41 by ltomasze          #+#    #+#             */
-/*   Updated: 2025/03/20 11:11:40 by ltomasze         ###   ########.fr       */
+/*   Updated: 2025/03/25 16:36:36 by ltomasze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ int	ft_check_player_border(char **map, int height)
 	return (0);
 }
 
-void	ft_free_map(char **map, int height)
+void	ft_free_map_for_check(char **map, int height)
 {
 	int	i;
 
@@ -99,9 +99,9 @@ int	ft_check_map_border(const char *filename)
 	if (ft_check_floor_border(map, height, width)
 		|| ft_check_player_border(map, height))
 	{
-		ft_free_map(map, height);
+		ft_free_map_for_check(map, height);
 		return (1);
 	}
-	ft_free_map(map, height);
+	ft_free_map_for_check(map, height);
 	return (0);
 }
