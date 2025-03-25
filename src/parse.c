@@ -154,6 +154,7 @@ void ft_parse_map(const char *filename, t_config *config)
         printf("Error: Memory allocation failed for map\n");
         return;
     }
+	ft_memset(config->map, 0, sizeof(char *) * (map_lines + 1));
 
     // Otwieramy plik .cub
     fd = ft_open_file(filename);

@@ -6,7 +6,7 @@
 /*   By: ltomasze <ltomasze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/22 15:45:26 by ltomasze          #+#    #+#             */
-/*   Updated: 2025/03/25 13:21:21 by ltomasze         ###   ########.fr       */
+/*   Updated: 2025/03/25 15:58:59 by ltomasze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,27 +52,26 @@ void ft_free_config(t_config *config)
 {
     int i;
 
-    // Zwalnianie pamięci dla tekstur (zakładając, że masz tablicę wskaźników do tekstur)
-    for (i = 0; i < 4; i++)  // 4 to liczba tekstur (NO, SO, WE, EA)
+	i = 0;
+    while (i < 4)
     {
         if (config->textures[i] != NULL)
         {
             free(config->textures[i]);
             config->textures[i] = NULL;
         }
+		i++;
     }
-
-    // Zwalnianie pamięci dla mapy
     if (config->map != NULL)
     {
         i = 0;
         while (config->map[i] != NULL)
         {
-            free(config->map[i]);  // Zwalniamy każdą linię mapy
+            free(config->map[i]);
             config->map[i] = NULL;
             i++;
         }
-        free(config->map);  // Zwalniamy tablicę wskaźników
+        free(config->map);
         config->map = NULL;
     }
 }
@@ -81,6 +80,7 @@ int	main(int argc, char **argv)
 {
 	t_config config;
 
+	config.map = NULL;
 	if (ft_check(argc, argv))
 		return (1);
 	if (ft_parse_cub(argv[1], &config))
@@ -90,9 +90,9 @@ int	main(int argc, char **argv)
 		return (1);
 	}
 	// Sprawdzenie, czy dane zostały prawidłowo załadowane
-    ft_print_textures(&config);   // Wyświetlanie tekstur
-    ft_print_colors(&config);     // Wyświetlanie kolorów
-    ft_print_map(&config);        // Wyświetlanie mapy
+    ft_print_textures(&config);
+    ft_print_colors(&config);
+    ft_print_map(&config);
 	printf("\n");
 	ft_free_config(&config);
 	return (0);
