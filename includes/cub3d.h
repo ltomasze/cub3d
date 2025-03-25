@@ -6,7 +6,7 @@
 /*   By: ltomasze <ltomasze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/22 15:16:49 by ltomasze          #+#    #+#             */
-/*   Updated: 2025/03/22 17:45:46 by ltomasze         ###   ########.fr       */
+/*   Updated: 2025/03/25 13:02:41 by ltomasze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,14 @@ typedef struct s_pos_in_map
 	int		height;
 	char	**map;
 }	t_pos_in_map;
+
+typedef struct s_config
+{
+    char    *textures[4];
+    int     floor_color;
+    int     ceiling_color;
+    char    **map;
+}   t_config;
 
 //get_next_line.c
 char	*get_next_line(int fd);
@@ -112,3 +120,8 @@ char	ft_get_ngh_player(char **map, int height, int ny, int nx);
 int		ft_check_nghs_player(char **map, int height, int y, int x);
 //check_utils.c
 int		ft_open_file(const char *filename);
+//parse.c
+void	ft_parse_texture(char *line, t_config *config);
+void	ft_parse_color(char *line, t_config *config);
+void	ft_parse_map(const char *line, t_config *config);
+int		ft_parse_cub(const char *filename, t_config *config);
