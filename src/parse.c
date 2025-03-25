@@ -18,18 +18,15 @@ void ft_parse_texture(char *line, t_config *config)
     char *path;
     int index;
 
-    while (*line == ' ' || *line == '\t') // Pomijanie początkowych białych znaków
+    while (*line == ' ' || *line == '\t')
         line++;
-
     index = ft_get_texture_index(line);
     if (index == -1)
         return;
-
-    line += 2; // Przechodzimy za "NO", "SO", "WE", "EA"
-    while (*line == ' ' || *line == '\t') // Pomijanie kolejnych białych znaków przed ścieżką
+    line += 2;
+    while (*line == ' ' || *line == '\t')
         line++;
-
-    path = ft_strdup(line); // Kopiujemy ścieżkę do tekstury
+    path = ft_strdup(line);
     if (path)
         config->textures[index] = path;
 }
@@ -42,57 +39,47 @@ int ft_extract_rgb(char *line, int *r, int *g, int *b)
     i = 0;
     while (i < 3)
     {
-        while (*line == ' ' || *line == '\t') // Pomijanie białych znaków przed liczbą
+        line = ft_skip_whitespaces(line);
+        if (!ft_isdigit(*line))
+            return (1);
+        values[i] = ft_atoi(line);
+        while (*line && *line != ',' && *line != ' ' && *line != '\t')
             line++;
-
-        if (!ft_isdigit(*line)) // Sprawdzenie, czy znak jest cyfrą
-            return (0);
-        
-        values[i] = ft_atoi(line); // Konwersja liczby
-        
-        while (*line && *line != ',' && *line != ' ' && *line != '\t') // Przejście przez liczbę
-            line++;
-
-        if (i < 2) // Po pierwszych dwóch liczbach sprawdzamy przecinek
+        if (i < 2)
         {
-            while (*line == ' ' || *line == '\t') // Pomijanie białych znaków przed przecinkiem
-                line++;
-            if (*line != ',') // Brak przecinka między wartościami
-                return (0);
-            line++; // Przesuwamy wskaźnik za przecinek
+            line = ft_skip_whitespaces(line);
+            if (*line != ',')
+                return (1);
+            line++;
         }
         i++;
     }
-
     *r = values[0];
     *g = values[1];
     *b = values[2];
-
-    return (1);
+    return (0);
 }
 
 void ft_parse_color(char *line, t_config *config)
 {
-    int r, g, b;
+    int r;
+	int g;
+	int	b;
     int *color_ptr;
 
-    while (*line == ' ' || *line == '\t') // Pomijanie początkowych białych znaków
+    while (*line == ' ' || *line == '\t')
         line++;
-
     if (ft_strncmp(line, "F", 1) == 0 && (line[1] == ' ' || line[1] == '\t'))
         color_ptr = &config->floor_color;
     else if (ft_strncmp(line, "C", 1) == 0 && (line[1] == ' ' || line[1] == '\t'))
         color_ptr = &config->ceiling_color;
     else
         return;
-
-    line += 2; // Przesuwamy wskaźnik za "F " lub "C "
-    while (*line == ' ' || *line == '\t') // Pomijanie kolejnych białych znaków
+    line += 2;
+    while (*line == ' ' || *line == '\t')
         line++;
-
-    if (!ft_extract_rgb(line, &r, &g, &b))
+    if (ft_extract_rgb(line, &r, &g, &b))
         return;
-
     *color_ptr = (r << 16) | (g << 8) | b;
 }
 
@@ -100,33 +87,33 @@ int ft_count_map_lines(const char *filename)
 {
     int fd;
     char *line;
-    int row_count = 0;
+    int row_count;
 
+	row_count = 0;
     fd = ft_open_file(filename);
     if (fd == -1)
-        return (-1);  // Błąd otwarcia pliku
-
+        return (-1);
     line = get_next_line(fd);
     while (line != NULL)
     {
-        if (ft_is_map_line(line))  // Sprawdzamy, czy to linia mapy
+        if (ft_is_map_line(line))
             row_count++;
-        free(line);  // Zwalniamy pamięć
-        line = get_next_line(fd);  // Wczytujemy kolejną linię
+        free(line);
+        line = get_next_line(fd);
     }
-
-    close(fd);  // Zamykamy plik
-    return (row_count);  // Zwracamy liczbę linii mapy
+    close(fd);
+    return (row_count);
 }
 
 void ft_parse_map(const char *filename, t_config *config)
 {
     int fd;
     char *line;
-    int row = 0;
+    int row;
     int map_lines;
 	int i;
 
+	row = 0;
 	if (config->map != NULL)
     {
         i = 0;
@@ -138,44 +125,35 @@ void ft_parse_map(const char *filename, t_config *config)
         free(config->map);
         config->map = NULL;
     }
-    // Liczymy liczbę linii mapy
     map_lines = ft_count_map_lines(filename);
     if (map_lines == -1)
     {
         printf("Error: Could not count map rows\n");
         return;
     }
-
-    // Alokujemy pamięć na mapę w zależności od liczby linii
-    config->map = malloc(sizeof(char *) * (map_lines + 1));  // +1 na NULL na końcu
-
+    config->map = malloc(sizeof(char *) * (map_lines + 1));
     if (config->map == NULL)
     {
         printf("Error: Memory allocation failed for map\n");
         return;
     }
 	ft_memset(config->map, 0, sizeof(char *) * (map_lines + 1));
-
-    // Otwieramy plik .cub
     fd = ft_open_file(filename);
     if (fd == -1)
         return;
-
     line = get_next_line(fd);
     while (line != NULL)
     {
-        if (ft_is_map_line(line))  // Sprawdzamy, czy to linia mapy
+        if (ft_is_map_line(line))
         {
-            config->map[row] = ft_strdup(line);  // Kopiujemy linię mapy
+            config->map[row] = ft_strdup(line);
             row++;
         }
-        free(line);  // Zwalniamy pamięć
-        line = get_next_line(fd);  // Wczytujemy kolejną linię
+        free(line);
+        line = get_next_line(fd);
     }
-
-    // Zakończenie mapy, dodajemy NULL na końcu
     config->map[row] = NULL;
-    close(fd);  // Zamykanie pliku
+    close(fd);
 }
 
 int ft_parse_cub(const char *filename, t_config *config)
