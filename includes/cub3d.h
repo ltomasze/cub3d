@@ -6,7 +6,7 @@
 /*   By: ltomasze <ltomasze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/22 15:16:49 by ltomasze          #+#    #+#             */
-/*   Updated: 2025/03/25 17:12:57 by ltomasze         ###   ########.fr       */
+/*   Updated: 2025/03/25 17:17:47 by ltomasze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,11 +29,11 @@ typedef struct s_pos_in_map
 
 typedef struct s_config
 {
-    char    *textures[4];
-    int     floor_color;
-    int     ceiling_color;
-    char    **map;
-}   t_config;
+	char	*textures[4];
+	int		floor_color;
+	int		ceiling_color;
+	char	**map;
+}	t_config;
 
 //get_next_line.c
 char	*get_next_line(int fd);

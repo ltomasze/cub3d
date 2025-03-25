@@ -6,7 +6,7 @@
 /*   By: ltomasze <ltomasze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/22 15:45:26 by ltomasze          #+#    #+#             */
-/*   Updated: 2025/03/25 16:55:19 by ltomasze         ###   ########.fr       */
+/*   Updated: 2025/03/25 17:16:18 by ltomasze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ void ft_print_map(t_config *config)
 
 int	main(int argc, char **argv)
 {
-	t_config config;
+	t_config	config;
 
 	config.map = NULL;
 	if (ft_check(argc, argv))
@@ -61,10 +61,9 @@ int	main(int argc, char **argv)
 		ft_free_config(&config);
 		return (1);
 	}
-	// Sprawdzenie, czy dane zostały prawidłowo załadowane
-    ft_print_textures(&config);
-    ft_print_colors(&config);
-    ft_print_map(&config);
+	ft_print_textures(&config);
+	ft_print_colors(&config);
+	ft_print_map(&config);
 	printf("\n");
 	ft_free_config(&config);
 	return (0);
