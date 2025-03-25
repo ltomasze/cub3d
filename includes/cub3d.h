@@ -6,7 +6,7 @@
 /*   By: ltomasze <ltomasze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/22 15:16:49 by ltomasze          #+#    #+#             */
-/*   Updated: 2025/03/25 17:02:22 by ltomasze         ###   ########.fr       */
+/*   Updated: 2025/03/25 17:12:57 by ltomasze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,6 +120,7 @@ char	ft_get_ngh_player(char **map, int height, int ny, int nx);
 int		ft_check_nghs_player(char **map, int height, int y, int x);
 //check_utils.c
 int		ft_open_file(const char *filename);
+//DIRECTORY PARSE
 //parse.c
 int		ft_get_texture_index(char *line);
 void	ft_parse_texture(char *line, t_config *config);
