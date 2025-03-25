@@ -6,7 +6,7 @@
 #    By: ltomasze <ltomasze@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/02/22 13:48:19 by ltomasze          #+#    #+#              #
-#    Updated: 2025/03/25 11:51:23 by ltomasze         ###   ########.fr        #
+#    Updated: 2025/03/25 17:03:49 by ltomasze         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,6 +32,8 @@ src/check/check_map_border2.c \
 src/check/check_map_border3.c \
 src/check/check_utils.c \
 src/parse.c \
+src/parse1.c \
+src/parse2.c \
 
 OBJECTS = $(SOURCES:%.c=%.o)
 CC = cc

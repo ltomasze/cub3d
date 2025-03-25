@@ -6,7 +6,7 @@
 /*   By: ltomasze <ltomasze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/22 15:16:49 by ltomasze          #+#    #+#             */
-/*   Updated: 2025/03/25 16:36:36 by ltomasze         ###   ########.fr       */
+/*   Updated: 2025/03/25 17:02:22 by ltomasze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,7 +121,16 @@ int		ft_check_nghs_player(char **map, int height, int y, int x);
 //check_utils.c
 int		ft_open_file(const char *filename);
 //parse.c
+int		ft_get_texture_index(char *line);
 void	ft_parse_texture(char *line, t_config *config);
+int		ft_extract_rgb(char *line, int *r, int *g, int *b);
 void	ft_parse_color(char *line, t_config *config);
-void	ft_parse_map(const char *line, t_config *config);
 int		ft_parse_cub(const char *filename, t_config *config);
+//parse1.c
+int		ft_count_map_lines(const char *filename);
+void	ft_free_map_for_parse(t_config *config);
+int		ft_init_map(t_config *config, int map_lines);
+void	ft_load_map(const char *filename, t_config *config);
+void	ft_parse_map(const char *filename, t_config *config);
+//parse2.c
+void	ft_free_config(t_config *config);
