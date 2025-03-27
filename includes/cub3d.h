@@ -6,7 +6,7 @@
 /*   By: ltomasze <ltomasze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/22 15:16:49 by ltomasze          #+#    #+#             */
-/*   Updated: 2025/03/27 13:11:26 by ltomasze         ###   ########.fr       */
+/*   Updated: 2025/03/27 13:16:39 by ltomasze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,8 +142,8 @@ typedef struct s_ray
 # define COLLISION_RADIUS 10
 # define PI 3.14159265359
 
-//# define FLOOR 0x009600
-//# define CELING 0x000096
+# define FLOOR 0x009600
+# define CELING 0x000096
 
 //get_next_line.c
 char	*get_next_line(int fd);
