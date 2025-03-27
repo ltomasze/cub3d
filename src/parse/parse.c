@@ -6,7 +6,7 @@
 /*   By: ltomasze <ltomasze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 16:29:53 by ltomasze          #+#    #+#             */
-/*   Updated: 2025/03/25 17:24:43 by ltomasze         ###   ########.fr       */
+/*   Updated: 2025/03/27 13:06:58 by ltomasze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ void	ft_parse_color(char *line, t_config *config)
 	*color_ptr = (r << 16) | (g << 8) | b;
 }
 
-int	ft_parse_cub(const char *filename, t_config *config)
+int	ft_parse(const char *filename, t_config *config)
 {
 	int		fd;
 	char	*line;

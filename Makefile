@@ -6,7 +6,7 @@
 #    By: ltomasze <ltomasze@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/02/22 13:48:19 by ltomasze          #+#    #+#              #
-#    Updated: 2025/03/25 17:10:31 by ltomasze         ###   ########.fr        #
+#    Updated: 2025/03/27 12:54:39 by ltomasze         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,6 +34,14 @@ src/check/check_utils.c \
 src/parse/parse.c \
 src/parse/parse1.c \
 src/parse/parse2.c \
+src/key.c \
+src/map.c \
+src/free.c \
+src/window.c \
+src/raycasting.c \
+src/textures.c \
+src/init_game.c\
+src/error.c\
 
 OBJECTS = $(SOURCES:%.c=%.o)
 CC = cc
