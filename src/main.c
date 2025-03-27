@@ -6,7 +6,7 @@
 /*   By: ltomasze <ltomasze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/22 15:45:26 by ltomasze          #+#    #+#             */
-/*   Updated: 2025/03/27 13:07:00 by ltomasze         ###   ########.fr       */
+/*   Updated: 2025/03/27 14:38:07 by ltomasze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,10 +93,10 @@ int	main(int argc, char **argv)
 	game.color_floor = config.floor_color;
 	game.color_ceiling = config.ceiling_color;
 	game.map = config.map;
+	ft_free_config(&config);
 	if(!init_game(&game, argv[1]))
 	{
 		printf("Error: Failed to initialize game\n");
-		ft_free_config(&config);
 		return (1);
 	}
 	mlx_hook(game.win, 2, 1L << 0, key_down, &game);
@@ -104,6 +104,5 @@ int	main(int argc, char **argv)
 	mlx_hook(game.win, 17, 0, close_button, &game);
 	mlx_loop_hook(game.mlx, draw_loop, &game);
 	mlx_loop(game.mlx);
-	//ft_free_config(&config);
 	return (0);
 }
