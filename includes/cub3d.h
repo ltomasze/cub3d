@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbany <mbany@student.42warsaw.pl>          +#+  +:+       +#+        */
+/*   By: ltomasze <ltomasze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/22 15:16:49 by ltomasze          #+#    #+#             */
-/*   Updated: 2025/04/06 16:16:57 by mbany            ###   ########.fr       */
+/*   Updated: 2025/04/06 17:43:41 by ltomasze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -333,3 +333,9 @@ char	*ft_strjoin_gnl(char *buffer, char *new_s);
 char	*tex_path_creator(char *line);
 void	path_counter(int code, t_game *data);
 char	*load_map(const char *file_path);
+
+// init_game1.c
+int		set_player_angle_and_position(t_game *game, int x, int y,
+			char direction);
+void	set_player_position(t_game *game);
+void	init_player(t_player *player);

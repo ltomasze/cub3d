@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse1.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbany <mbany@student.42warsaw.pl>          +#+  +:+       +#+        */
+/*   By: ltomasze <ltomasze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 16:56:59 by ltomasze          #+#    #+#             */
-/*   Updated: 2025/04/05 17:03:08 by mbany            ###   ########.fr       */
+/*   Updated: 2025/04/06 17:56:53 by ltomasze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,32 +60,33 @@ int	ft_init_map(t_config *config, int map_lines)
 	return (0);
 }
 
-void    ft_load_map(const char *filename, t_config *config)
+void	ft_load_map(const char *filename, t_config *config)
 {
-    int     fd;
-    char    *line;
-    int     row;
-    int     len;
-    fd = ft_open_file(filename);
-    if (fd == -1)
-        return ;
-    line = get_next_line(fd);
-    row = 0;
-    while (line != NULL)
-    {
-        len = ft_strlen(line);
-        if (len > 0 && line[len - 1] == '\n')
-            line[len - 1] = '\0';
-        if (ft_is_map_line(line))
-        {
-            config->map[row] = ft_strdup(line);
-            row++;
-        }
-        free(line);
-        line = get_next_line(fd);
-    }
-    config->map[row] = NULL;
-    close(fd);
+	int		fd;
+	char	*line;
+	int		row;
+	int		len;
+
+	fd = ft_open_file(filename);
+	if (fd == -1)
+		return ;
+	line = get_next_line(fd);
+	row = 0;
+	while (line != NULL)
+	{
+		len = ft_strlen(line);
+		if (len > 0 && line[len - 1] == '\n')
+			line[len - 1] = '\0';
+		if (ft_is_map_line(line))
+		{
+			config->map[row] = ft_strdup(line);
+			row++;
+		}
+		free(line);
+		line = get_next_line(fd);
+	}
+	config->map[row] = NULL;
+	close(fd);
 }
 
 void	ft_parse_map(const char *filename, t_config *config)

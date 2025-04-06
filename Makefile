@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mbany <mbany@student.42warsaw.pl>          +#+  +:+       +#+         #
+#    By: ltomasze <ltomasze@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/02/22 13:48:19 by ltomasze          #+#    #+#              #
-#    Updated: 2025/04/06 15:46:44 by mbany            ###   ########.fr        #
+#    Updated: 2025/04/06 17:44:14 by ltomasze         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -44,6 +44,7 @@ src/raycasting.c \
 src/raycasting2.c \
 src/textures.c \
 src/init_game.c\
+src/init_game1.c \
 src/error.c\
 
 OBJECTS = $(SOURCES:%.c=%.o)
