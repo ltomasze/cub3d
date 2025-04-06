@@ -6,7 +6,7 @@
 /*   By: mbany <mbany@student.42warsaw.pl>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/22 15:16:49 by ltomasze          #+#    #+#             */
-/*   Updated: 2025/04/01 20:26:52 by mbany            ###   ########.fr       */
+/*   Updated: 2025/04/06 16:16:57 by mbany            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,8 @@ typedef struct s_player
 	float		x;
 	float		y;
 	float		angle;
+	float		look_offset;
+
 }	t_player;
 
 typedef struct s_texture
@@ -144,7 +146,7 @@ typedef struct s_ray
 #define LEFT_ARROW_KEY 65361
 #define RIGHT_ARROW_KEY 65363
 
-#define WIDTH 1440
+#define WIDTH 960
 #define HEIGHT 720
 #define BLOCK 64
 #define DEBUG 0
@@ -267,6 +269,7 @@ int		draw_loop(t_game *game);
 
 //kay.c
 // int mouse_move(int x, int y, t_game *game);
+int		mouse_move(int x, int y, t_game *game);
 int		key_down(int keycode, t_game *game);
 int		key_up(int keycode, t_player *player);
 void	rotate_player(t_player *player);
@@ -314,6 +317,7 @@ int		error(t_error code, t_game *game);
 
 //init_game.c
 void	init_ray(t_ray *ray, t_player *player, float ray_angle);
+void	set_player_position(t_game *game);
 int		init_game(t_game *game, char *file);
 void	init_game_struct(t_game *game);
 void	init_player(t_player *player);

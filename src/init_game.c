@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_game.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ltomasze <ltomasze@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mbany <mbany@student.42warsaw.pl>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/16 15:11:49 by mbany             #+#    #+#             */
-/*   Updated: 2025/04/06 14:17:37 by ltomasze         ###   ########.fr       */
+/*   Updated: 2025/04/06 16:51:46 by mbany            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,33 +20,50 @@ void	init_ray(t_ray *ray, t_player *player, float ray_angle)
 	ray->mapy = (int)(player->y / BLOCK);
 }
 
-int ft_map_max_height(const char **map) 
+int	set_player_angle_and_position(t_game *game, int x, int y, char direction)
 {
-    int max_height = 0;
-    while (map[max_height] != NULL) 
-        max_height++;
-    return max_height;
+	game->player.x = x * BLOCK + BLOCK / 2;
+	game->player.y = y * BLOCK + BLOCK / 2;
+	if (direction == 'N')
+		game->player.angle = 3 * PI / 2;
+	else if (direction == 'S')
+		game->player.angle = PI / 2;
+	else if (direction == 'E')
+		game->player.angle = 0;
+	else if (direction == 'W')
+		game->player.angle = PI;
+	else
+		return (0);
+	game->map[y][x] = '0';
+	return (1);
 }
 
-int	ft_map_max_width(const char **map, int max_height, int *max_width)
+void	set_player_position(t_game *game)
 {
-	*max_width = 0;
-    int i = 0;
-    while (i < max_height)
+	int	y;
+	int	x;
+
+	y = 0;
+	while (game->map[y])
 	{
-        int current_width = strlen(map[i]);
-        if (current_width > *max_width)
-            *max_width = current_width;
-        i++;
-    }
-	return *max_width;
+		x = 0;
+		while (game->map[y][x])
+		{
+			if (game->map[y][x] == 'N' || game->map[y][x] == 'S' ||
+				game->map[y][x] == 'E' || game->map[y][x] == 'W')
+			{
+				if (set_player_angle_and_position(game, x, y, game->map[y][x]))
+					return ;
+			}
+			x++;
+		}
+		y++;
+	}
 }
 
 void	init_player(t_player *player)
 {
-	player->x = 587;
-	player->y = 166;
-	player->angle = PI / 1.8;
+	player->angle = PI;
 	player->key_up = false;
 	player->key_down = false;
 	player->key_left = false;
@@ -55,6 +72,7 @@ void	init_player(t_player *player)
 	player->rotate_right = false;
 }
 
+// t_config	config;
 void	init_game_struct(t_game *game)
 {
 	game->mlx = NULL;
@@ -64,17 +82,16 @@ void	init_game_struct(t_game *game)
 	game->map = game->config.map;
 	game->copy_map = NULL;
 	game->map = game->config.map;
-		
+	game->color_floor = game->config.floor_color;
+	game->color_ceiling = game->config.ceiling_color;
 	game->n_tex_path = game->config.textures[0];
-    game->s_tex_path = game->config.textures[1];
-    game->w_tex_path = game->config.textures[2];
-    game->e_tex_path = game->config.textures[3];
-
+	game->s_tex_path = game->config.textures[1];
+	game->w_tex_path = game->config.textures[2];
+	game->e_tex_path = game->config.textures[3];
 	game->n_path = 0;
-    game->s_path = 0;
-    game->w_path = 0;
-    game->e_path = 0;
-
+	game->s_path = 0;
+	game->w_path = 0;
+	game->e_path = 0;
 }
 
 int	init_game(t_game *game, char *file)
@@ -82,14 +99,7 @@ int	init_game(t_game *game, char *file)
 	init_game_struct(game);
 	init_player(&game->player);
 	game->fd = open(file, O_RDONLY);
-	/////////////////////////////////////////
-	// if (!parsing(game))
-	// 	return (error(INVALID_MAP, game));
-	int map_height = ft_map_max_height((const char **)game->map);
-    int map_width = ft_map_max_width((const char **)game->map, map_height, &map_width);
-    printf("Map height: %d, Map width: %d\n", map_height, map_width);
-	
-	/////////////////////////////////////////
+	set_player_position(game);
 	game->mlx = mlx_init();
 	game->win = mlx_new_window(game->mlx, WIDTH, HEIGHT, "cub3d");
 	game->img = mlx_new_image(game->mlx, WIDTH, HEIGHT);
@@ -98,5 +108,6 @@ int	init_game(t_game *game, char *file)
 	if (!load_all_textures(game))
 		return (error(INVALID_FILE, game));
 	mlx_put_image_to_window(game->mlx, game->win, game->img, 0, 0);
+	mlx_mouse_move(game->mlx, game->win, WIDTH / 2, HEIGHT / 2);
 	return (1);
 }

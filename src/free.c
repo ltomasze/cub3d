@@ -6,7 +6,7 @@
 /*   By: mbany <mbany@student.42warsaw.pl>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/04 18:23:41 by mbany             #+#    #+#             */
-/*   Updated: 2025/03/30 17:19:02 by mbany            ###   ########.fr       */
+/*   Updated: 2025/04/06 15:38:05 by mbany            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,4 +52,3 @@ void	free_all_textures(t_game *game)
 	free_texture(game, &game->w_tex);
 	free_texture(game, &game->e_tex);
 }
-

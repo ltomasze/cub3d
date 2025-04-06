@@ -6,7 +6,7 @@
 /*   By: mbany <mbany@student.42warsaw.pl>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/04 18:21:28 by mbany             #+#    #+#             */
-/*   Updated: 2025/03/29 15:04:36 by mbany            ###   ########.fr       */
+/*   Updated: 2025/04/06 15:34:23 by mbany            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	rotate_player(t_player *player)
 {
 	float	angle_speed;	
 
-	angle_speed = 0.015;
+	angle_speed = 0.029;
 	if (player->angle < 0)
 		player->angle += 2 * PI;
 	if (player->angle >= 2 * PI)
@@ -66,6 +66,7 @@ int	key_up(int key, t_player *player)
 	return (0);
 }
 
+// printf("Player angle: %f radians\n", player->angle);
 void	calc_new_pos(t_player *player, int *new_x, int *new_y, int speed)
 {
 	float	cos_angle;
@@ -103,7 +104,7 @@ void	move_player(t_player *player, t_game *game)
 
 	new_x = player->x;
 	new_y = player->y;
-	speed = 2.1;
+	speed = 2;
 	calc_new_pos(player, &new_x, &new_y, speed);
 	if (!touch(new_x, player->y, game))
 		player->x = new_x;

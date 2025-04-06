@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ltomasze <ltomasze@student.42.fr>          +#+  +:+       +#+         #
+#    By: mbany <mbany@student.42warsaw.pl>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/02/22 13:48:19 by ltomasze          #+#    #+#              #
-#    Updated: 2025/03/27 12:54:39 by ltomasze         ###   ########.fr        #
+#    Updated: 2025/04/06 15:46:44 by mbany            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,10 +35,13 @@ src/parse/parse.c \
 src/parse/parse1.c \
 src/parse/parse2.c \
 src/key.c \
+src/key2.c \
 src/map.c \
 src/free.c \
 src/window.c \
+src/window2.c \
 src/raycasting.c \
+src/raycasting2.c \
 src/textures.c \
 src/init_game.c\
 src/error.c\
