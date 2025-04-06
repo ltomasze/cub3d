@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ltomasze <ltomasze@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mbany <mbany@student.42warsaw.pl>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 16:29:53 by ltomasze          #+#    #+#             */
-/*   Updated: 2025/03/27 13:06:58 by ltomasze         ###   ########.fr       */
+/*   Updated: 2025/04/05 15:58:45 by mbany            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,22 +25,39 @@ int	ft_get_texture_index(char *line)
 	return (-1);
 }
 
+
 void	ft_parse_texture(char *line, t_config *config)
 {
 	char	*path;
 	int		index;
-
+	int		len;
+	// Pomijamy początkowe białe znaki (spacje i tabulatory)
 	while (*line == ' ' || *line == '\t')
 		line++;
+	// Pobieramy indeks tekstury
 	index = ft_get_texture_index(line);
 	if (index == -1)
 		return ;
+	// Przechodzimy przez dwukropek i wszelkie białe znaki po nim
 	line += 2;
 	while (*line == ' ' || *line == '\t')
 		line++;
+	// Kopiujemy ścieżkę do zmiennej path
 	path = ft_strdup(line);
 	if (path)
+	{
+		// Znajdujemy długość skopiowanej ścieżki
+		len = ft_strlen(path);
+		// Usuwamy wszelkie białe znaki (spacje, tabulatory) po ostatnim znaku 'xpm'
+		while (len > 0 && (path[len - 1] == ' ' || path[len - 1] == '\t' || path[len - 1] == '\n'))
+		{
+			// Zmniejszamy długość, by usunąć zbędne znaki
+			path[len - 1] = '\0';
+			len--;
+		}
+		// Przypisujemy oczyszczoną ścieżkę do odpowiedniej tekstury
 		config->textures[index] = path;
+	}
 }
 
 int	ft_extract_rgb(char *line, int *r, int *g, int *b)

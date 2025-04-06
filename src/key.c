@@ -6,40 +6,11 @@
 /*   By: mbany <mbany@student.42warsaw.pl>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/04 18:21:28 by mbany             #+#    #+#             */
-/*   Updated: 2025/03/23 16:06:57 by mbany            ###   ########.fr       */
+/*   Updated: 2025/03/29 15:04:36 by mbany            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
-
-/*
-int mouse_move(int x, int y, t_game *game)
-{
-	printf("Mouse moved: x = %d, y = %d\n", x, y);
-    static int prev_x = WIDTH / 2; // Środek okna
-    float angle_speed = 0.005;
-
-    (void)y; // Ignorujemy ruch w osi Y
-
-    // Oblicz różnicę pozycji kursora w osi X
-    int delta_x = x - prev_x;
-
-    // Zaktualizuj kąt gracza
-    game->player.angle += delta_x * angle_speed;
-
-    // Normalizacja kąta
-    if (game->player.angle < 0)
-        game->player.angle += 2 * PI;
-    if (game->player.angle >= 2 * PI)
-        game->player.angle -= 2 * PI;
-
-    // Ustaw kursor na środku okna
-    mlx_mouse_move(game->mlx, game->win, WIDTH / 2, HEIGHT / 2);
-	prev_x = WIDTH / 2; // Zresetuj poprzednią pozycję kursora
-
-    return (0);
-}
-*/
 
 void	rotate_player(t_player *player)
 {
@@ -50,12 +21,12 @@ void	rotate_player(t_player *player)
 		player->angle += 2 * PI;
 	if (player->angle >= 2 * PI)
 		player->angle -= 2 * PI;
-		
 	if (player->rotate_right)
 		player->angle += angle_speed;
 	if (player->rotate_left)
 		player->angle -= angle_speed;
 }
+
 int	key_down(int key, t_game *game)
 {
 	if (key == ESC_KEY)
@@ -95,7 +66,6 @@ int	key_up(int key, t_player *player)
 	return (0);
 }
 
-
 void	calc_new_pos(t_player *player, int *new_x, int *new_y, int speed)
 {
 	float	cos_angle;
@@ -128,8 +98,8 @@ void	calc_new_pos(t_player *player, int *new_x, int *new_y, int speed)
 void	move_player(t_player *player, t_game *game)
 {
 	float	speed;
-	int	new_x;
-	int	new_y;
+	int		new_x;
+	int		new_y;
 
 	new_x = player->x;
 	new_y = player->y;

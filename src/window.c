@@ -6,7 +6,7 @@
 /*   By: mbany <mbany@student.42warsaw.pl>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/04 18:19:57 by mbany             #+#    #+#             */
-/*   Updated: 2025/03/23 14:24:39 by mbany            ###   ########.fr       */
+/*   Updated: 2025/03/28 20:15:29 by mbany            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,10 +67,11 @@ void	clear_image(t_game *game)
 		y++;
 	}
 }
-void	draw_floor_ceiling(t_game *game)
+
+void	draw_ceiling(t_game *game, int celing_color)
 {
 	int	x;
-	int	y;	
+	int	y;
 
 	y = 0;
 	while (y < HEIGHT / 2)
@@ -78,22 +79,33 @@ void	draw_floor_ceiling(t_game *game)
 		x = 0;
 		while (x < WIDTH)
 		{
-			put_pixel(x, y, CELING, game);
-			x++;
-		}
-		y++;
-	}
-	while (y < HEIGHT)
-	{
-		x = 0;
-		while (x < WIDTH)
-		{
-			put_pixel(x, y, FLOOR, game);
+			put_pixel(x, y, celing_color, game);
 			x++;
 		}
 		y++;
 	}
 }
 
+void	draw_floor(t_game *game, int floor_color)
+{
+	int	x;
+	int	y;
 
+	y = HEIGHT / 2;
+	while (y < HEIGHT)
+	{
+		x = 0;
+		while (x < WIDTH)
+		{
+			put_pixel(x, y, floor_color, game);
+			x++;
+		}
+		y++;
+	}
+}
 
+void	draw_floor_ceiling(t_game *game)
+{
+	draw_ceiling(game, game->color_ceiling);
+	draw_floor(game, game->color_floor);
+}

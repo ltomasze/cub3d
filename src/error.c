@@ -6,7 +6,7 @@
 /*   By: mbany <mbany@student.42warsaw.pl>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/22 14:29:35 by mbany             #+#    #+#             */
-/*   Updated: 2025/03/22 14:39:38 by mbany            ###   ########.fr       */
+/*   Updated: 2025/03/30 17:17:05 by mbany            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static void	error_clean_up(t_game *game)
 {
 	free_map(game->map);
 	free_map(game->copy_map);
-	free_texture_paths(game);
+	// free_texture_paths(game);
 }
 
 int	error(t_error code, t_game *game)

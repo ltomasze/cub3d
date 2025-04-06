@@ -6,56 +6,78 @@
 /*   By: mbany <mbany@student.42warsaw.pl>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/04 18:19:05 by mbany             #+#    #+#             */
-/*   Updated: 2025/03/25 19:16:26 by mbany            ###   ########.fr       */
+/*   Updated: 2025/03/29 17:48:49 by mbany            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
-void draw_map(t_game *game)
+static void	draw_tile(int x, int y, t_draw_data *data, t_game *game)
 {
-    int x, y;
-    int tile_size = BLOCK / 8; // Rozmiar kafelka na minimapie (1/8 rozmiaru bloku)
-    int offset_x = 10;        // Przesunięcie minimapy od lewej krawędzi
-    int offset_y = 10;        // Przesunięcie minimapy od górnej krawędzi
+	int	i;
+	int	j;
 
-    // Iteracja po mapie
-    for (y = 0; game->map[y] != NULL; y++)
-    {
-        for (x = 0; game->map[y][x] != '\0'; x++)
-        {
-            int color = CELING; // Domyślny kolor (czarny)
-
-            if (game->map[y][x] == '1') // Ściana
-                color = 0xFF0000; // Czerwony
-            else if (game->map[y][x] == '0') // Puste miejsce
-                color = FLOOR; // Szary
-
-            // Rysowanie kafelka na obrazie
-            for (int i = 0; i < tile_size; i++)
-            {
-                for (int j = 0; j < tile_size; j++)
-                {
-                    put_pixel(offset_x + x * tile_size + i,
-                              offset_y + y * tile_size + j,
-                              color, game);
-                }
-            }
-        }
-    }
-
-    // Rysowanie gracza na minimapie
-    int player_tile_x = offset_x + (game->player.x / BLOCK) * tile_size;
-    int player_tile_y = offset_y + (game->player.y / BLOCK) * tile_size;
-
-    for (int i = 0; i < tile_size; i++)
-    {
-        for (int j = 0; j < tile_size; j++)
-        {
-            put_pixel(player_tile_x + i,
-                      player_tile_y + j,
-                      0x00FF00, game); // Zielony kolor dla gracza
-        }
-    }
+	i = 0;
+	while (i < data->tile_size)
+	{
+		j = 0;
+		while (j < data->tile_size)
+		{
+			put_pixel(x + i, y + j, data->color, game);
+			j++;
+		}
+		i++;
+	}
 }
 
+static void	draw_map_tiles_helper(t_game *game, t_draw_data *data, int x, int y)
+{
+	if (game->map[y][x] == '1')
+		data->color = 0xff0000;
+	else if (game->map[y][x] == '0')
+		data->color = game->color_floor;
+	else
+		data->color = game->color_ceiling;
+	draw_tile(data->offset_x + x * data->tile_size,
+		data->offset_y + y * data->tile_size, data, game);
+}
+
+static void	draw_map_tiles(t_game *game, t_draw_data *data)
+{
+	int	x;
+	int	y;
+
+	y = 0;
+	while (game->map[y] != NULL)
+	{
+		x = 0;
+		while (game->map[y][x] != '\0')
+		{
+			draw_map_tiles_helper(game, data, x, y);
+			x++;
+		}
+		y++;
+	}
+}
+
+static void	draw_player_on_map(t_game *game, t_draw_data *data)
+{
+	int	player_tile_x;
+	int	player_tile_y;
+
+	player_tile_x = data->offset_x + (game->player.x / BLOCK) * data->tile_size;
+	player_tile_y = data->offset_y + (game->player.y / BLOCK) * data->tile_size;
+	data->color = 0x000000;
+	draw_tile(player_tile_x, player_tile_y, data, game);
+}
+
+void	draw_map(t_game *game)
+{
+	t_draw_data	data;
+
+	data.tile_size = BLOCK / 8;
+	data.offset_x = 10;
+	data.offset_y = 10;
+	draw_map_tiles(game, &data);
+	draw_player_on_map(game, &data);
+}
