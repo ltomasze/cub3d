@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_game.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbany <mbany@student.42warsaw.pl>          +#+  +:+       +#+        */
+/*   By: ltomasze <ltomasze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/16 15:11:49 by mbany             #+#    #+#             */
-/*   Updated: 2025/04/05 19:52:58 by mbany            ###   ########.fr       */
+/*   Updated: 2025/04/06 14:17:37 by ltomasze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,29 @@ void	init_ray(t_ray *ray, t_player *player, float ray_angle)
 	ray->mapx = (int)(player->x / BLOCK);
 	ray->mapy = (int)(player->y / BLOCK);
 }
+
+int ft_map_max_height(const char **map) 
+{
+    int max_height = 0;
+    while (map[max_height] != NULL) 
+        max_height++;
+    return max_height;
+}
+
+int	ft_map_max_width(const char **map, int max_height, int *max_width)
+{
+	*max_width = 0;
+    int i = 0;
+    while (i < max_height)
+	{
+        int current_width = strlen(map[i]);
+        if (current_width > *max_width)
+            *max_width = current_width;
+        i++;
+    }
+	return *max_width;
+}
+
 void	init_player(t_player *player)
 {
 	player->x = 587;
@@ -32,7 +55,6 @@ void	init_player(t_player *player)
 	player->rotate_right = false;
 }
 
-t_config	config;
 void	init_game_struct(t_game *game)
 {
 	game->mlx = NULL;
@@ -63,7 +85,9 @@ int	init_game(t_game *game, char *file)
 	/////////////////////////////////////////
 	// if (!parsing(game))
 	// 	return (error(INVALID_MAP, game));
-
+	int map_height = ft_map_max_height((const char **)game->map);
+    int map_width = ft_map_max_width((const char **)game->map, map_height, &map_width);
+    printf("Map height: %d, Map width: %d\n", map_height, map_width);
 	
 	/////////////////////////////////////////
 	game->mlx = mlx_init();
@@ -76,147 +100,3 @@ int	init_game(t_game *game, char *file)
 	mlx_put_image_to_window(game->mlx, game->win, game->img, 0, 0);
 	return (1);
 }
-
-
-//tmp===================================================
-
-
-
-/*
-int	parsing(t_game *data)
-{
-    char	*line;
-    int		is_map_started;
-
-    is_map_started = 0;
-    while (1)
-    {
-        line = get_next_line(data->fd);
-        if (!line)
-            break ;
-        if (!is_map_started)
-        {
-            if (!line_redirection(line, &is_map_started))
-                return (0);
-        }
-        if (is_map_started)
-        {
-            create_map(line, data);
-		
-            break ;
-        }
-        if (line)
-            free(line);
-    }
-    return (1);
-}
-
-static int	is_map_line(char *line)
-{
-	int	i;
-
-	i = 0;
-	while (line[i] == ' ')
-		i++;
-	if (!line[i] || line[i] == '\n')
-		return (0);
-	while (line[i] && line[i] != '\n')
-	{
-		if (!ft_strchr("01NSEW ", line[i]))
-			return (0);
-		i++;
-	}
-	return (1);
-}
-
-int	line_redirection(char *line, int *is_map_started)
-{
-	if (!ft_strcmp(line, "\n"))
-	{
-		line = NULL;
-		free(line);
-		return (1);
-	}
-	if (!line_check(line))
-	{
-		free(line);
-		return (0);
-	}
-	if (is_map_line(line))
-		*is_map_started = 1;
-	return (1);
-}
-
-
-void	free_split(char **arr)
-{
-	int	i;
-
-	if (!arr)
-		return ;
-	i = 0;
-	while (arr[i])
-	{
-		free(arr[i]);
-		i++;
-	}
-	free(arr);
-}
-
-
-
-int	line_check(char *line)
-{
-    if (!ft_strcmp(line, "\n"))
-        return (0);
-    else
-        return (1);
-}
-
-int	create_map(char *line, t_game *data)
-{
-	char	*next;
-
-	while (1)
-	{
-		next = get_next_line(data->fd);
-		if (!next)
-			break ;
-		line = ft_strjoin_gnl(line, next);
-		free(next);
-	}
-	data->map = ft_split(line, '\n');
-	data->copy_map = ft_split(line, '\n');
-	close(data->fd);
-	free(line);
-	return (1);
-}
-
-char	*ft_strjoin_gnl(char *buffer, char *new_s)
-{
-	int		i;
-	int		j;
-	char	*string;
-	int		length;
-
-	length = 0;
-	i = 0;
-	j = 0;
-	if (!buffer || !new_s)
-		return (NULL);
-	length = ft_strlen(buffer) + ft_strlen(new_s);
-	string = (char *)malloc((sizeof(char) * (length + 1)));
-	if (!string)
-		return (NULL);
-	while (buffer[i] != '\0')
-		string[j++] = buffer[i++];
-	i = 0;
-	while (new_s[i] != '\0')
-		string[j++] = new_s[i++];
-	string[j] = '\0';
-	if (buffer)
-		free(buffer);
-	buffer = NULL;
-	return (string);
-}
-	*/
