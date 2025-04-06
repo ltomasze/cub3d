@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbany <mbany@student.42warsaw.pl>          +#+  +:+       +#+        */
+/*   By: ltomasze <ltomasze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/22 15:45:26 by ltomasze          #+#    #+#             */
-/*   Updated: 2025/04/06 16:40:40 by mbany            ###   ########.fr       */
+/*   Updated: 2025/04/06 17:32:07 by ltomasze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 int	close_game(t_game *game)
 {
+	ft_free_config(&game->config);
 	free_all_textures(game);
 	if (game->img)
 		mlx_destroy_image(game->mlx, game->img);
@@ -61,6 +62,7 @@ int	draw_loop(t_game *game)
 	return (0);
 }
 
+
 int	main(int argc, char **argv)
 {
 	t_game		game;
@@ -88,4 +90,3 @@ int	main(int argc, char **argv)
 	mlx_loop(game.mlx);
 	return (0);
 }
-// ft_free_config(&game.config);
