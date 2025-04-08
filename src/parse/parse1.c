@@ -6,7 +6,7 @@
 /*   By: ltomasze <ltomasze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 16:56:59 by ltomasze          #+#    #+#             */
-/*   Updated: 2025/04/06 17:56:53 by ltomasze         ###   ########.fr       */
+/*   Updated: 2025/04/08 20:24:41 by ltomasze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,10 +91,8 @@ void	ft_load_map(const char *filename, t_config *config)
 
 void	ft_parse_map(const char *filename, t_config *config)
 {
-	int	row;
 	int	map_lines;
 
-	row = 0;
 	if (config->map != NULL)
 		ft_free_map_for_parse(config);
 	map_lines = ft_count_map_lines(filename);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_game.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ltomasze <ltomasze@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mbany <mbany@student.42warsaw.pl>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/16 15:11:49 by mbany             #+#    #+#             */
-/*   Updated: 2025/04/06 17:42:44 by ltomasze         ###   ########.fr       */
+/*   Updated: 2025/04/08 18:37:32 by mbany            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ int	init_game(t_game *game, char *file)
 	if (!load_all_textures(game))
 		return (error(INVALID_FILE, game));
 	mlx_put_image_to_window(game->mlx, game->win, game->img, 0, 0);
-	mlx_mouse_move(game->mlx, game->win, WIDTH / 2, HEIGHT / 2);
+	game->prev_mouse_x = WIDTH / 2;
+	game->prev_mouse_y = HEIGHT / 2;
 	return (1);
 }

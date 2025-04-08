@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ltomasze <ltomasze@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mbany <mbany@student.42warsaw.pl>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/22 15:16:49 by ltomasze          #+#    #+#             */
-/*   Updated: 2025/04/06 17:43:41 by ltomasze         ###   ########.fr       */
+/*   Updated: 2025/04/08 18:47:40 by mbany            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,8 @@ typedef struct s_game
 	char		*s_tex_path;
 	char		*w_tex_path;
 	char		*e_tex_path;
+	int			prev_mouse_x;
+	int			prev_mouse_y;
 	t_player	player;
 	t_tex		n_tex;
 	t_tex		s_tex;
