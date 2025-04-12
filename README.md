@@ -12,9 +12,9 @@ Sample Map<br>
 A sample map file (example.cub) is located in the maps/ directory.<br>​
 
 This project serves as an excellent introduction to computer graphics and 3D rendering techniques, providing practical experience with raycasting algorithms and graphical resource management.<br>
-
-
-
+<br>
+<br>
+<br>
 Projekt cub3D to zadanie realizowane w ramach programu szkoły 42, mające na celu stworzenie prostego silnika 3D z wykorzystaniem techniki raycastingowej, inspirowanego klasyczną grą Wolfenstein 3D.<br>
 Gracz porusza się po labiryncie z perspektywy pierwszej osoby, a świat gry renderowany jest w czasie rzeczywistym na podstawie mapy zapisanej w pliku .cub.<br>
 
