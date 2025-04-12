@@ -6,7 +6,7 @@
 /*   By: ltomasze <ltomasze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 12:48:26 by ltomasze          #+#    #+#             */
-/*   Updated: 2025/04/08 20:22:36 by ltomasze         ###   ########.fr       */
+/*   Updated: 2025/03/22 17:00:54 by ltomasze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ void	ft_trim_whitespace_end_tx(char *trimmed)
 int	ft_trim_path_tx(const char *path, char *trimmed)
 {
 	int	i;
+	int	len;
 
 	if (ft_strlen(path) >= 1023)
 	{
@@ -41,6 +42,7 @@ int	ft_trim_path_tx(const char *path, char *trimmed)
 		i++;
 	}
 	trimmed[i] = '\0';
+	len = ft_strlen(trimmed);
 	ft_trim_whitespace_end_tx(trimmed);
 	if (ft_strlen(trimmed) == 0)
 	{

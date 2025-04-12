@@ -148,8 +148,8 @@ typedef struct s_ray
 #define LEFT_ARROW_KEY 65361
 #define RIGHT_ARROW_KEY 65363
 
-#define WIDTH 960
-#define HEIGHT 720
+#define WIDTH 1440
+#define HEIGHT 1080
 #define BLOCK 64
 #define DEBUG 0
 #define COLLISION_RADIUS 10
