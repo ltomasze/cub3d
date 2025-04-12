@@ -6,7 +6,7 @@ To compile and run the project, follow these steps:<br> make<br> ./cub3D maps/ex
 The map file (.cub) should contain information about textures, ceiling and floor colors, and the layout of walls.<br>​
 
 Controls <br>
-W, A, S, D – move<br> ←, → or Q, E – rotate camera<br> ESC – exit the game<br>​
+W, A, S, D – move<br> ←, → – rotate camera<br> ESC – exit the game<br>​
 
 Sample Map<br>
 A sample map file (example.cub) is located in the maps/ directory.<br>​
@@ -27,7 +27,7 @@ Plik mapy (.cub) powinien zawierać informacje o teksturach, kolorach sufitu i p
 
 Sterowanie<br>
 W, A, S, D – poruszanie się<br>​
-←, → lub Q, E – obrót kamery<br>​
+←, → – obrót kamery<br>​
 ESC – wyjście z gry<br>
 
 Przykładowa mapa<br>
